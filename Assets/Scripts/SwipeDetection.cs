@@ -11,10 +11,10 @@ public class SwipeDetection : MonoBehaviour
     [SerializeField] float maximumTime = 1f;
     [SerializeField, Range(0,1)] float directionThreshold = 0.9f;
 
-    private Vector2 startPosition;
-    private Vector2 endPosition;
-    private float startTime;
-    private float endTime;
+    private Vector2 _startPosition;
+    private Vector2 _endPosition;
+    private float _startTime;
+    private float _endTime;
 
     private void Awake()
     {
@@ -35,23 +35,23 @@ public class SwipeDetection : MonoBehaviour
 
     private void SwipeStart(Vector2 position, float time)
     {
-        startPosition = position;
-        startTime = time;
+        _startPosition = position;
+        _startTime = time;
     }
     private void SwipeEnd(Vector2 position, float time)
     {
-        endPosition = position;
-        endTime = time;
+        _endPosition = position;
+        _endTime = time;
         DetectSwipe();
     }
 
     private void DetectSwipe()
     {
-        if (Vector3.Distance(startPosition, endPosition) >= minimumDistance && 
-            (endTime - startTime) <= maximumTime)
+        if (Vector3.Distance(_startPosition, _endPosition) >= minimumDistance && 
+            (_endTime - _startTime) <= maximumTime)
         {
-            Debug.DrawLine(startPosition, endPosition, Color.red, 5);
-            Vector3 direction = endPosition - startPosition;
+            Debug.DrawLine(_startPosition, _endPosition, Color.red, 5);
+            Vector3 direction = _endPosition - _startPosition;
             Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
             SwipeDirection(direction2D);
         }
@@ -61,17 +61,15 @@ public class SwipeDetection : MonoBehaviour
     {
         if(Vector2.Dot(Vector2.up, direction) > directionThreshold)
         {
-            //Debug.Log("Swipe up");
+            InputManager.instance.Jump();
         }
         else if (Vector2.Dot(Vector2.left, direction) > directionThreshold)
         {
             InputManager.instance.MoveLeft();
-            //Debug.Log("Swipe left");
         }
         else if (Vector2.Dot(Vector2.right, direction) > directionThreshold)
         {
             InputManager.instance.MoveRight();
-            //Debug.Log("Swipe right");
         }
         else if (Vector2.Dot(Vector2.down, direction) > directionThreshold)
         {

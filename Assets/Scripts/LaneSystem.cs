@@ -3,20 +3,15 @@ using UnityEngine.UI;
 
 public class LaneSystem : MonoBehaviour
 {
-    public Text currentLaneText;
+    public PlayerController player;
     public Transform[] lanes;
 
-    private int CurrentLaneIndex { get; set; } // Range 0 - 2
-    private Transform CurrentLane { get { return lanes[CurrentLaneIndex]; } } // Current lane transform
+    private int _CurrentLaneIndex { get; set; } // Range 0 - 2
+    private Transform _CurrentLane { get { return lanes[_CurrentLaneIndex]; } } // Current lane transform
 
     private void Awake()
     {
-        CurrentLaneIndex = 1; // Begins on the middle lane
-    }
-
-    private void Update()
-    {
-        currentLaneText.text = CurrentLaneIndex.ToString();
+        _CurrentLaneIndex = 1; // Begins on the middle lane
     }
 
     private void OnEnable()
@@ -33,22 +28,22 @@ public class LaneSystem : MonoBehaviour
 
     private void IncreaseCurrentLane() // Called on right input
     {
-        if(CurrentLaneIndex > 0)
+        if(_CurrentLaneIndex > 0 && player.CanInteract)
         {
-            CurrentLaneIndex--;
+            _CurrentLaneIndex--;
         }
     }
 
     private void DecreaseCurrentLane() // Called on left input
     {
-        if (CurrentLaneIndex < 2)
+        if (_CurrentLaneIndex < 2 && player.CanInteract)
         {
-            CurrentLaneIndex++;
+            _CurrentLaneIndex++;
         }
     }
 
     public Vector3 GetLane() // Called by player on Update Method
     {
-        return CurrentLane.position;
+        return _CurrentLane.position;
     }
 }

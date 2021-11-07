@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,42 +15,46 @@ public class InputManager : MonoBehaviour
 
     public Action OnMoveLeft;
     public Action OnMoveRight;
+    public Action OnJump;
 
-    private PlayerControls playerControls;
-    private Camera mainCamera;
+    private PlayerControls _playerControls;
+    private Camera _mainCamera;
     private void Awake()
     {
         instance = this.GetComponent<InputManager>();
-        playerControls = new PlayerControls();
-        mainCamera = Camera.main;
+        _playerControls = new PlayerControls();
+        _mainCamera = Camera.main;
     }
 
     private void OnEnable()
     {
-        playerControls.Enable();
+        _playerControls.Enable();
     }
 
     private void OnDisable()
     {
-        playerControls.Disable();
+        _playerControls.Disable();
     }
 
     private void Start()
     {
-        playerControls.Touch.PrimaryContact.started += context => StartTouchPrimary(context);
-        playerControls.Touch.PrimaryContact.canceled += context => EndTouchPrimary(context);
-        playerControls.Keyboard.LeftArrow.performed += context => MoveLeft();
-        playerControls.Keyboard.RightArrow.performed += context => MoveRight();
+        _playerControls.Touch.PrimaryContact.started += context => StartTouchPrimary(context);
+        _playerControls.Touch.PrimaryContact.canceled += context => EndTouchPrimary(context);
+
+        _playerControls.Keyboard.LeftArrow.performed += context => MoveLeft();
+        _playerControls.Keyboard.RightArrow.performed += context => MoveRight();
+        _playerControls.Keyboard.UpArrow.performed += context => Jump();
+        _playerControls.Keyboard.DownArrow.performed += context => Crouch();
     }
 
     private void StartTouchPrimary(InputAction.CallbackContext context)
     {
-        OnStartTouch?.Invoke(Utils.ScreenToWorld(mainCamera, playerControls.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)context.startTime);
+        OnStartTouch?.Invoke(Utils.ScreenToWorld(_mainCamera, _playerControls.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)context.startTime);
     }
 
     private void EndTouchPrimary(InputAction.CallbackContext context)
     {
-        OnEndTouch?.Invoke(Utils.ScreenToWorld(mainCamera, playerControls.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)context.time);
+        OnEndTouch?.Invoke(Utils.ScreenToWorld(_mainCamera, _playerControls.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)context.time);
     }
 
     public void MoveLeft() // Called by left command of all types of controllers
@@ -61,5 +66,12 @@ public class InputManager : MonoBehaviour
     {
         OnMoveRight?.Invoke();
     }
-
+    internal void Jump()
+    {
+        OnJump?.Invoke();
+    }
+    private void Crouch()
+    {
+        throw new NotImplementedException();
+    }
 }

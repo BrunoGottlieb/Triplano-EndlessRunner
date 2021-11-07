@@ -79,6 +79,22 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""UpArrow"",
+                    ""type"": ""Button"",
+                    ""id"": ""f781bfb0-db1b-48ce-929e-3b1835ab11b8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""DownArrow"",
+                    ""type"": ""Button"",
+                    ""id"": ""fbe9e7de-87b7-474e-994a-707ce7952aab"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -125,6 +141,50 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""RightArrow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""df13abff-7679-4c21-90d4-c17f5068683d"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UpArrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3dd0f181-488c-47e7-bac7-80d71964102f"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UpArrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f95fec6a-ea68-4185-9a42-aa6bc76a193c"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DownArrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""97bbc78f-d5df-4d13-b1e1-a526db1bffd8"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DownArrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -139,6 +199,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
         m_Keyboard_LeftArrow = m_Keyboard.FindAction("LeftArrow", throwIfNotFound: true);
         m_Keyboard_RightArrow = m_Keyboard.FindAction("RightArrow", throwIfNotFound: true);
+        m_Keyboard_UpArrow = m_Keyboard.FindAction("UpArrow", throwIfNotFound: true);
+        m_Keyboard_DownArrow = m_Keyboard.FindAction("DownArrow", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -231,12 +293,16 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private IKeyboardActions m_KeyboardActionsCallbackInterface;
     private readonly InputAction m_Keyboard_LeftArrow;
     private readonly InputAction m_Keyboard_RightArrow;
+    private readonly InputAction m_Keyboard_UpArrow;
+    private readonly InputAction m_Keyboard_DownArrow;
     public struct KeyboardActions
     {
         private @PlayerControls m_Wrapper;
         public KeyboardActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @LeftArrow => m_Wrapper.m_Keyboard_LeftArrow;
         public InputAction @RightArrow => m_Wrapper.m_Keyboard_RightArrow;
+        public InputAction @UpArrow => m_Wrapper.m_Keyboard_UpArrow;
+        public InputAction @DownArrow => m_Wrapper.m_Keyboard_DownArrow;
         public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -252,6 +318,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @RightArrow.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnRightArrow;
                 @RightArrow.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnRightArrow;
                 @RightArrow.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnRightArrow;
+                @UpArrow.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnUpArrow;
+                @UpArrow.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnUpArrow;
+                @UpArrow.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnUpArrow;
+                @DownArrow.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnDownArrow;
+                @DownArrow.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnDownArrow;
+                @DownArrow.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnDownArrow;
             }
             m_Wrapper.m_KeyboardActionsCallbackInterface = instance;
             if (instance != null)
@@ -262,6 +334,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @RightArrow.started += instance.OnRightArrow;
                 @RightArrow.performed += instance.OnRightArrow;
                 @RightArrow.canceled += instance.OnRightArrow;
+                @UpArrow.started += instance.OnUpArrow;
+                @UpArrow.performed += instance.OnUpArrow;
+                @UpArrow.canceled += instance.OnUpArrow;
+                @DownArrow.started += instance.OnDownArrow;
+                @DownArrow.performed += instance.OnDownArrow;
+                @DownArrow.canceled += instance.OnDownArrow;
             }
         }
     }
@@ -275,5 +353,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     {
         void OnLeftArrow(InputAction.CallbackContext context);
         void OnRightArrow(InputAction.CallbackContext context);
+        void OnUpArrow(InputAction.CallbackContext context);
+        void OnDownArrow(InputAction.CallbackContext context);
     }
 }

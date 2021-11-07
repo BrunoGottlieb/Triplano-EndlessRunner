@@ -31,7 +31,7 @@ public class LaneSystem : MonoBehaviour
         InputManager.instance.OnMoveLeft -= IncreaseCurrentLane;
     }
 
-    private void IncreaseCurrentLane() // Called on right swipe
+    private void IncreaseCurrentLane() // Called on right input
     {
         if(CurrentLaneIndex > 0)
         {
@@ -39,7 +39,7 @@ public class LaneSystem : MonoBehaviour
         }
     }
 
-    private void DecreaseCurrentLane() // Called on left swipe
+    private void DecreaseCurrentLane() // Called on left input
     {
         if (CurrentLaneIndex < 2)
         {
@@ -47,7 +47,7 @@ public class LaneSystem : MonoBehaviour
         }
     }
 
-    public Vector3 GetLane() // Called by player
+    public Vector3 GetLane() // Called by player on Update Method
     {
         return CurrentLane.position;
     }

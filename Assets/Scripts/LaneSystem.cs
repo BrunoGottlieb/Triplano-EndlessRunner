@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LaneSystem : MonoBehaviour
 {
+    public Text currentLaneText;
     public Transform[] lanes;
 
     private int CurrentLaneIndex { get; set; } // Range 0 - 2
@@ -12,16 +14,21 @@ public class LaneSystem : MonoBehaviour
         CurrentLaneIndex = 1; // Begins on the middle lane
     }
 
+    private void Update()
+    {
+        currentLaneText.text = CurrentLaneIndex.ToString();
+    }
+
     private void OnEnable()
     {
-        SwipeDetection.instance.RightSwype += DecreaseCurrentLane;
-        SwipeDetection.instance.LeftSwype += IncreaseCurrentLane;
+        InputManager.instance.OnMoveRight += DecreaseCurrentLane;
+        InputManager.instance.OnMoveLeft += IncreaseCurrentLane;
     }
 
     private void OnDisable()
     {
-        SwipeDetection.instance.RightSwype -= DecreaseCurrentLane;
-        SwipeDetection.instance.LeftSwype -= IncreaseCurrentLane;
+        InputManager.instance.OnMoveRight -= DecreaseCurrentLane;
+        InputManager.instance.OnMoveLeft -= IncreaseCurrentLane;
     }
 
     private void IncreaseCurrentLane() // Called on right swipe

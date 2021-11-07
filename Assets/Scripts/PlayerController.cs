@@ -9,46 +9,43 @@ public class PlayerController : MonoBehaviour
 
     private int Speed { get; set; }
 
-    private Vector3 Destination { get; set; }
-
     public void Init(int speed, LaneSystem laneSystem)
     {
         _laneSystem = laneSystem;
         _speed = speed;
-        Awake();
+        Start();
     }
 
-    private void Awake()
+    private void Start()
     {
-        Destination = _laneSystem.GetLane();
         Speed = _speed;
     }
 
     private void OnEnable()
     {
-        SwipeDetection.instance.LeftSwype += MoveLeft;
-        SwipeDetection.instance.RightSwype += MoveRight;
+        InputManager.instance.OnMoveLeft += OnMoveLeft;
+        InputManager.instance.OnMoveRight += OnMoveRight;
     }
 
     private void OnDisable()
     {
-        SwipeDetection.instance.LeftSwype -= MoveLeft;
-        SwipeDetection.instance.RightSwype -= MoveRight;
+        InputManager.instance.OnMoveLeft -= OnMoveLeft;
+        InputManager.instance.OnMoveRight -= OnMoveRight;
     }
 
     private void FixedUpdate()
     {
         float step = Speed * Time.deltaTime;
-        this.transform.position = Vector3.MoveTowards(transform.position, Destination, step);
+        this.transform.position = Vector3.MoveTowards(transform.position, _laneSystem.GetLane(), step);
     }
 
-    private void MoveLeft()
+    private void OnMoveLeft()
     {
-        Destination = _laneSystem.GetLane();
+
     }
 
-    private void MoveRight()
+    private void OnMoveRight()
     {
-        Destination = _laneSystem.GetLane();
+
     }
 }

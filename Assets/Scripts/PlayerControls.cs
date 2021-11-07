@@ -59,6 +59,74 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Keyboard"",
+            ""id"": ""52ec1100-7088-4116-b47e-6966d25046fc"",
+            ""actions"": [
+                {
+                    ""name"": ""LeftArrow"",
+                    ""type"": ""Button"",
+                    ""id"": ""3cc0e8f1-a4a6-44c5-b285-6ea61b9b7321"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""RightArrow"",
+                    ""type"": ""Button"",
+                    ""id"": ""72189b75-cc2c-4739-a127-e4d66d9116a9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""72fe07b8-dc72-47ee-b21d-911213de0692"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftArrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f45bba64-65ab-4b35-a599-885c96d4177b"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LeftArrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aa490774-3e73-4ad6-a70f-2aa0fea3220e"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightArrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""17b09c85-e733-4f88-a8aa-8eed0cefe27d"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightArrow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -67,6 +135,10 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Touch = asset.FindActionMap("Touch", throwIfNotFound: true);
         m_Touch_PrimaryContact = m_Touch.FindAction("PrimaryContact", throwIfNotFound: true);
         m_Touch_PrimaryPosition = m_Touch.FindAction("PrimaryPosition", throwIfNotFound: true);
+        // Keyboard
+        m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
+        m_Keyboard_LeftArrow = m_Keyboard.FindAction("LeftArrow", throwIfNotFound: true);
+        m_Keyboard_RightArrow = m_Keyboard.FindAction("RightArrow", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -153,9 +225,55 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         }
     }
     public TouchActions @Touch => new TouchActions(this);
+
+    // Keyboard
+    private readonly InputActionMap m_Keyboard;
+    private IKeyboardActions m_KeyboardActionsCallbackInterface;
+    private readonly InputAction m_Keyboard_LeftArrow;
+    private readonly InputAction m_Keyboard_RightArrow;
+    public struct KeyboardActions
+    {
+        private @PlayerControls m_Wrapper;
+        public KeyboardActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @LeftArrow => m_Wrapper.m_Keyboard_LeftArrow;
+        public InputAction @RightArrow => m_Wrapper.m_Keyboard_RightArrow;
+        public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(KeyboardActions set) { return set.Get(); }
+        public void SetCallbacks(IKeyboardActions instance)
+        {
+            if (m_Wrapper.m_KeyboardActionsCallbackInterface != null)
+            {
+                @LeftArrow.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnLeftArrow;
+                @LeftArrow.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnLeftArrow;
+                @LeftArrow.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnLeftArrow;
+                @RightArrow.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnRightArrow;
+                @RightArrow.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnRightArrow;
+                @RightArrow.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnRightArrow;
+            }
+            m_Wrapper.m_KeyboardActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @LeftArrow.started += instance.OnLeftArrow;
+                @LeftArrow.performed += instance.OnLeftArrow;
+                @LeftArrow.canceled += instance.OnLeftArrow;
+                @RightArrow.started += instance.OnRightArrow;
+                @RightArrow.performed += instance.OnRightArrow;
+                @RightArrow.canceled += instance.OnRightArrow;
+            }
+        }
+    }
+    public KeyboardActions @Keyboard => new KeyboardActions(this);
     public interface ITouchActions
     {
         void OnPrimaryContact(InputAction.CallbackContext context);
         void OnPrimaryPosition(InputAction.CallbackContext context);
+    }
+    public interface IKeyboardActions
+    {
+        void OnLeftArrow(InputAction.CallbackContext context);
+        void OnRightArrow(InputAction.CallbackContext context);
     }
 }

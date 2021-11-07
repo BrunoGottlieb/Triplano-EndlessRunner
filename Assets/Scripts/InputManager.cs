@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,9 @@ public class InputManager : MonoBehaviour
     public event StartTouch OnStartTouch;
     public delegate void EndTouch(Vector2 position, float time);
     public event EndTouch OnEndTouch;
+
+    public Action OnMoveLeft;
+    public Action OnMoveRight;
 
     private PlayerControls playerControls;
     private Camera mainCamera;
@@ -34,6 +38,8 @@ public class InputManager : MonoBehaviour
     {
         playerControls.Touch.PrimaryContact.started += context => StartTouchPrimary(context);
         playerControls.Touch.PrimaryContact.canceled += context => EndTouchPrimary(context);
+        playerControls.Keyboard.LeftArrow.performed += context => MoveLeft();
+        playerControls.Keyboard.RightArrow.performed += context => MoveRight();
     }
 
     private void StartTouchPrimary(InputAction.CallbackContext context)
@@ -44,12 +50,16 @@ public class InputManager : MonoBehaviour
     private void EndTouchPrimary(InputAction.CallbackContext context)
     {
         OnEndTouch?.Invoke(Utils.ScreenToWorld(mainCamera, playerControls.Touch.PrimaryPosition.ReadValue<Vector2>()), (float)context.time);
-
     }
 
-    public Vector2 PrimaryPosition()
+    public void MoveLeft() // Called by left command of all types of controllers
     {
-        return Utils.ScreenToWorld(mainCamera, playerControls.Touch.PrimaryPosition.ReadValue<Vector2>());
+        OnMoveLeft?.Invoke();
+    }
+
+    public void MoveRight() // Called by right command of all types of controllers
+    {
+        OnMoveRight?.Invoke();
     }
 
 }

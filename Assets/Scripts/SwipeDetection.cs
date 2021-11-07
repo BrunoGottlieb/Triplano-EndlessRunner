@@ -16,9 +16,6 @@ public class SwipeDetection : MonoBehaviour
     private float startTime;
     private float endTime;
 
-    public Action LeftSwype;
-    public Action RightSwype;
-
     private void Awake()
     {
         instance = this.GetComponent<SwipeDetection>();
@@ -68,12 +65,12 @@ public class SwipeDetection : MonoBehaviour
         }
         else if (Vector2.Dot(Vector2.left, direction) > directionThreshold)
         {
-            LeftSwype?.Invoke();
+            InputManager.instance.MoveLeft();
             //Debug.Log("Swipe left");
         }
         else if (Vector2.Dot(Vector2.right, direction) > directionThreshold)
         {
-            RightSwype?.Invoke();
+            InputManager.instance.MoveRight();
             //Debug.Log("Swipe right");
         }
         else if (Vector2.Dot(Vector2.down, direction) > directionThreshold)

@@ -33,19 +33,19 @@ public class SwipeDetection : MonoBehaviour
         InputManager.instance.OnEndTouch -= SwipeEnd;
     }
 
-    private void SwipeStart(Vector2 position, float time)
+    private void SwipeStart(Vector2 position, float time) // Start touching the screen
     {
         _startPosition = position;
         _startTime = time;
     }
-    private void SwipeEnd(Vector2 position, float time)
+    private void SwipeEnd(Vector2 position, float time) // Not touching it anymore
     {
         _endPosition = position;
         _endTime = time;
         DetectSwipe();
     }
 
-    private void DetectSwipe()
+    private void DetectSwipe() // Check if it's indeed a swype
     {
         if (Vector3.Distance(_startPosition, _endPosition) >= minimumDistance && 
             (_endTime - _startTime) <= maximumTime)

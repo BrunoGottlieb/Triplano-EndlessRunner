@@ -4,23 +4,36 @@ using UnityEngine;
 
 public class PlayerMovementManager : MonoBehaviour
 {
-    public void Move(float speed, Vector3 destination) // Called by Player Controller FixedUpdate
+    public Transform bodyJumper;
+    private PlayerController _controller;
+    private void Awake()
+    {
+        _controller = this.GetComponent<PlayerController>();
+    }
+    public void Move(float speed, Vector3 destination) // Called by Player Controller FixedUpdate | Change between lanes
     {
         float step = speed * Time.deltaTime;
         this.transform.position = Vector3.MoveTowards(transform.position, destination, step);
     }
 
-    public void Jump(Rigidbody rb, float fallMultiplier)
+    public void Jump(float fallSpeed, float jumpHeight, float jumpSpeed)
     {
-        /*if(rb.velocity.y < 0)
+        if (_controller.IsJumping) // Move up
         {
-            rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-        }*/
+            float step = jumpSpeed * Time.deltaTime; // Jump speed
+
+            bodyJumper.transform.localPosition = Vector3.MoveTowards(bodyJumper.localPosition, new Vector3(0,jumpHeight,0), step);
+        
+            if(bodyJumper.localPosition.y >= jumpHeight) // Check maximum height
+            {
+                _controller.IsJumping = false; // Not jumping anymore
+            }
+        }
+        else // Not jumping, move down
+        {
+            float step = fallSpeed * Time.deltaTime; // Gravity
+
+            bodyJumper.transform.localPosition = Vector3.MoveTowards(bodyJumper.localPosition, Vector3.zero, step);
+        }
     }
-
-    public void ApplyJump(Rigidbody rb, float jumpSpeed)
-    {
-
-    }
-
 }

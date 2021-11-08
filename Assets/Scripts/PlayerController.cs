@@ -5,38 +5,41 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private LaneSystem _laneSystem;
-    [SerializeField] private int _speed = 8;
+    [SerializeField] private int _laneSpeed = 8;
     [SerializeField] private float _jumpSpeed = 3;
-    [SerializeField] private float _fallMultiplier = 0.5f;
+    [SerializeField] private float _jumpHeight = 3;
+    [SerializeField] private float _fallSpeed = 0.5f;
 
     private PlayerMovementManager _movementManager;
-    private Rigidbody _rb;
 
-    private int _Speed { get; set; }
-    private float _FallMultiplier { get; set; }
+    private int _LaneSpeed { get; set; }
+    private float _FallSpeed { get; set; }
+    private float _JumpHeight { get; set; }
     private float _JumpSpeed { get; set; }
     public bool CanInteract { get; set; }
+    public bool IsJumping { get; set; }
 
     private void Awake()
     {
         _movementManager = this.GetComponent<PlayerMovementManager>();
-        _rb = this.GetComponent<Rigidbody>();
     }
 
-    public void Init(int speed, float fallMultiplier, float jumpSpeed, LaneSystem laneSystem)
+    public void Init(int laneSpeed, float fallSpeed, float jumpSpeed, float jumpHeight, LaneSystem laneSystem)
     {
         _laneSystem = laneSystem;
-        _speed = speed;
-        _fallMultiplier = fallMultiplier;
+        _laneSpeed = laneSpeed;
+        _fallSpeed = fallSpeed;
         _jumpSpeed = jumpSpeed;
+        _jumpHeight = jumpHeight;
         Start();
     }
 
     private void Start()
     {
-        _Speed = _speed;
-        _FallMultiplier = _fallMultiplier;
+        _LaneSpeed = _laneSpeed;
+        _FallSpeed = _fallSpeed;
         _JumpSpeed = _jumpSpeed;
+        _JumpHeight = _jumpHeight;
     }
 
     private void OnEnable()
@@ -68,22 +71,22 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _movementManager.Move(_Speed, _laneSystem.GetLane());
-        _movementManager.Jump(_rb, _FallMultiplier);
+        _movementManager.Move(_LaneSpeed, _laneSystem.GetLane());
+        _movementManager.Jump(_FallSpeed, _JumpHeight, _JumpSpeed);
     }
 
-    private void OnMoveLeft()
+    private void OnMoveLeft() // Called by input event
     {
 
     }
 
-    private void OnMoveRight()
+    private void OnMoveRight() // Called by input event
     {
 
     }
 
-    private void OnJump()
+    private void OnJump() // Called by input event
     {
-        _movementManager.ApplyJump(_rb, _jumpSpeed);
+        IsJumping = true;
     }
 }

@@ -44,7 +44,7 @@ public class InputManager : MonoBehaviour
         _playerControls.Keyboard.LeftArrow.performed += context => MoveLeft();
         _playerControls.Keyboard.RightArrow.performed += context => MoveRight();
         _playerControls.Keyboard.UpArrow.performed += context => Jump();
-        _playerControls.Keyboard.DownArrow.performed += context => Crouch();
+        _playerControls.Keyboard.DownArrow.performed += context => Slide();
     }
 
     private void StartTouchPrimary(InputAction.CallbackContext context)
@@ -70,7 +70,7 @@ public class InputManager : MonoBehaviour
     {
         OnJump?.Invoke();
     }
-    private void Crouch()
+    private void Slide()
     {
         throw new NotImplementedException();
     }

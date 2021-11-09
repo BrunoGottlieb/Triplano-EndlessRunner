@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,5 +36,10 @@ public class PlayerMovementManager : MonoBehaviour
 
             bodyJumper.transform.localPosition = Vector3.MoveTowards(bodyJumper.localPosition, Vector3.zero, step);
         }
+    }
+
+    public void Slide()
+    {
+        /// Not necessary
     }
 }

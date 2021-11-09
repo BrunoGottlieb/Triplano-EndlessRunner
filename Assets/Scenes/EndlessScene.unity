@@ -841,7 +841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _laneSystem: {fileID: 2032728296}
-  _speed: 10
+  _laneSpeed: 8
   _jumpSpeed: 3
   _jumpHeight: 1
   _fallSpeed: 1.25

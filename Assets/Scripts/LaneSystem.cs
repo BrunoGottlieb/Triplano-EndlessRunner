@@ -28,7 +28,7 @@ public class LaneSystem : MonoBehaviour
 
     private void IncreaseCurrentLane() // Called on right input
     {
-        if(_CurrentLaneIndex > 0 && player.CanInteract)
+        if(_CurrentLaneIndex > 0 && player.CanChangeLane)
         {
             _CurrentLaneIndex--;
         }
@@ -36,7 +36,7 @@ public class LaneSystem : MonoBehaviour
 
     private void DecreaseCurrentLane() // Called on left input
     {
-        if (_CurrentLaneIndex < 2 && player.CanInteract)
+        if (_CurrentLaneIndex < 2 && player.CanChangeLane)
         {
             _CurrentLaneIndex++;
         }

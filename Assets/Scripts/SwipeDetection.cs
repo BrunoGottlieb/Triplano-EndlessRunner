@@ -73,7 +73,7 @@ public class SwipeDetection : MonoBehaviour
         }
         else if (Vector2.Dot(Vector2.down, direction) > directionThreshold)
         {
-            //Debug.Log("Swipe down");
+            InputManager.instance.Slide();
         }
         else
         {

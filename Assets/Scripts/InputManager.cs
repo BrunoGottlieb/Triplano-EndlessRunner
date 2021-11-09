@@ -16,9 +16,11 @@ public class InputManager : MonoBehaviour
     public Action OnMoveLeft;
     public Action OnMoveRight;
     public Action OnJump;
+    public Action OnSlide;
 
     private PlayerControls _playerControls;
     private Camera _mainCamera;
+
     private void Awake()
     {
         instance = this.GetComponent<InputManager>();
@@ -66,12 +68,12 @@ public class InputManager : MonoBehaviour
     {
         OnMoveRight?.Invoke();
     }
-    internal void Jump()
+    public void Jump()
     {
         OnJump?.Invoke();
     }
-    private void Slide()
+    public void Slide()
     {
-        throw new NotImplementedException();
+        OnSlide?.Invoke();
     }
 }

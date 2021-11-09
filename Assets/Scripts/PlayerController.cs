@@ -11,17 +11,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _fallSpeed = 0.5f;
 
     private PlayerMovementManager _movementManager;
+    private PlayerAnimationManager _animatorManager;
 
     private int _LaneSpeed { get; set; }
     private float _FallSpeed { get; set; }
     private float _JumpHeight { get; set; }
     private float _JumpSpeed { get; set; }
-    public bool CanInteract { get; set; }
+    public bool CanChangeLane { get; set; }
     public bool IsJumping { get; set; }
+    public bool IsSliding { get; set; }
 
     private void Awake()
     {
         _movementManager = this.GetComponent<PlayerMovementManager>();
+        _animatorManager = this.GetComponent<PlayerAnimationManager>();
     }
 
     public void Init(int laneSpeed, float fallSpeed, float jumpSpeed, float jumpHeight, LaneSystem laneSystem)
@@ -47,6 +50,7 @@ public class PlayerController : MonoBehaviour
         InputManager.instance.OnMoveLeft += OnMoveLeft;
         InputManager.instance.OnMoveRight += OnMoveRight;
         InputManager.instance.OnJump += OnJump;
+        InputManager.instance.OnSlide += OnSlide;
     }
 
     private void OnDisable()
@@ -54,39 +58,52 @@ public class PlayerController : MonoBehaviour
         InputManager.instance.OnMoveLeft -= OnMoveLeft;
         InputManager.instance.OnMoveRight -= OnMoveRight;
         InputManager.instance.OnJump -= OnJump;
+        InputManager.instance.OnSlide -= OnSlide;
     }
 
     private void OnTriggerStay(Collider other)
     {
         if (other.GetComponent<Lane>() != null) // Player is on a lane
         {
-            CanInteract = true;
+            CanChangeLane = true;
         }
     }
 
     private void OnTriggerExit(Collider other) // Player can't interact while changing lane
     {
-        CanInteract = false;
+        CanChangeLane = false;
     }
 
     private void FixedUpdate()
     {
         _movementManager.Move(_LaneSpeed, _laneSystem.GetLane());
         _movementManager.Jump(_FallSpeed, _JumpHeight, _JumpSpeed);
+        _movementManager.Slide();
     }
 
-    private void OnMoveLeft() // Called by input event
+    private void OnMoveLeft() // Called by input action
     {
-
+        /// Not necessary
     }
 
-    private void OnMoveRight() // Called by input event
+    private void OnMoveRight() // Called by input action
     {
-
+        /// Not necessary
     }
 
-    private void OnJump() // Called by input event
+    private void OnJump() // Called by input action
     {
-        IsJumping = true;
+        if(_animatorManager.PlayerCanInteract)
+        {
+            IsJumping = true;
+        }
+    }
+
+    private void OnSlide() // Called by input action
+    {
+        if(_animatorManager.PlayerCanInteract)
+        {
+            IsSliding = true;
+        }
     }
 }

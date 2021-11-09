@@ -43,6 +43,12 @@ public sealed class PlayerAnimationManager : MonoBehaviour
         }
     }
 
+    public void SetDamage()
+    {
+        _anim.SetTrigger("Damage");
+        print("fda");
+    }
+
     public void SetNotJumping() // Called on the heighest position of jump
     {
         _anim.SetBool("IsJumping", false);

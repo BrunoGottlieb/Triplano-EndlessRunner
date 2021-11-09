@@ -19,11 +19,11 @@ public sealed class PlayerInteractionManager : MonoBehaviour
         if (obstacle != null)
         {
             print("Death");
-            if (obstacle.TakeDamage())
-            {
-
-            }
+            _animationManager.SetDamage();
         }
+
+        ICollectable collectable = other.GetComponent<ICollectable>();
+        collectable?.Collect();
     }
 
     private void OnTriggerStay(Collider other)

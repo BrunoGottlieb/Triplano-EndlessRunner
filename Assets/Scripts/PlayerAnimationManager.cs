@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimationManager : MonoBehaviour
+public sealed class PlayerAnimationManager : MonoBehaviour
 {
     private Animator _anim;
 
     public bool PlayerCanInteract { get { return _anim.GetBool("CanInteract"); } }
+    public bool IsJumping { get { return _anim.GetBool("IsJumping"); } }
+    public bool IsSliding { get { return _anim.GetBool("IsSliding"); } }
 
     private void Awake()
     {
@@ -29,7 +31,7 @@ public class PlayerAnimationManager : MonoBehaviour
     {
         if(PlayerCanInteract)
         {
-            _anim.SetTrigger("Jump");
+            _anim.SetBool("IsJumping", true);
         }
     }
 
@@ -37,8 +39,18 @@ public class PlayerAnimationManager : MonoBehaviour
     {
         if (PlayerCanInteract)
         {
-            _anim.SetTrigger("Slide");
+            _anim.SetBool("IsSliding", true);
         }
+    }
+
+    public void SetNotJumping() // Called on the heighest position of jump
+    {
+        _anim.SetBool("IsJumping", false);
+    }
+
+    public void Die()
+    {
+        _anim.SetBool("IsDead", true);
     }
 
 }

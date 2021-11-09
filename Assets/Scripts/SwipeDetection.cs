@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 
 [DefaultExecutionOrder(-1)]
-public class SwipeDetection : MonoBehaviour
+public sealed class SwipeDetection : MonoBehaviour
 {
     public static SwipeDetection instance;
 

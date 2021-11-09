@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LaneSystem : MonoBehaviour
+public sealed class LaneSystem : MonoBehaviour
 {
     public PlayerController player;
     public Transform[] lanes;

@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovementManager : MonoBehaviour
+public sealed class PlayerMovementManager : MonoBehaviour
 {
     public Transform bodyJumper;
-    private PlayerController _controller;
+    private PlayerAnimationManager _animator;
+
     private void Awake()
     {
-        _controller = this.GetComponent<PlayerController>();
+        _animator = this.GetComponent<PlayerAnimationManager>();
     }
     public void Move(float speed, Vector3 destination) // Called by Player Controller FixedUpdate | Change between lanes
     {
@@ -19,7 +20,7 @@ public class PlayerMovementManager : MonoBehaviour
 
     public void Jump(float fallSpeed, float jumpHeight, float jumpSpeed)
     {
-        if (_controller.IsJumping) // Move up
+        if (_animator.IsJumping) // Move up
         {
             float step = jumpSpeed * Time.deltaTime; // Jump speed
 
@@ -27,7 +28,7 @@ public class PlayerMovementManager : MonoBehaviour
         
             if(bodyJumper.localPosition.y >= jumpHeight) // Check maximum height
             {
-                _controller.IsJumping = false; // Not jumping anymore
+                _animator.SetNotJumping(); // Not jumping anymore
             }
         }
         else // Not jumping, move down
@@ -42,4 +43,5 @@ public class PlayerMovementManager : MonoBehaviour
     {
         /// Not necessary
     }
+
 }

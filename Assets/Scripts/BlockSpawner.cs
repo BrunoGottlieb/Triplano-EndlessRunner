@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockSpawner : MonoBehaviour
+public sealed class BlockSpawner : MonoBehaviour
 {
     public Transform[] blocks;
     public float initialSpeed = 10;

@@ -6,6 +6,6 @@ public class Lane : MonoBehaviour
 {
     private void Awake()
     {
-        this.GetComponentInChildren<MeshRenderer>().enabled = false;
+        this.transform.GetChild(0).gameObject.SetActive(false);
     }
 }

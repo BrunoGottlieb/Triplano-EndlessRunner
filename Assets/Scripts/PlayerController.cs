@@ -2,24 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public sealed class PlayerController : MonoBehaviour
 {
     [SerializeField] private LaneSystem _laneSystem;
     [SerializeField] private int _laneSpeed = 8;
     [SerializeField] private float _jumpSpeed = 3;
     [SerializeField] private float _jumpHeight = 3;
     [SerializeField] private float _fallSpeed = 0.5f;
+    [SerializeField] private GameObject[] bodyColliders; // 0 = stand | 1 = jump | 2 = slide
 
     private PlayerMovementManager _movementManager;
     private PlayerAnimationManager _animatorManager;
+    private enum BodyCollider { Stand, Jump, Slide }
 
     private int _LaneSpeed { get; set; }
     private float _FallSpeed { get; set; }
     private float _JumpHeight { get; set; }
     private float _JumpSpeed { get; set; }
     public bool CanChangeLane { get; set; }
-    public bool IsJumping { get; set; }
-    public bool IsSliding { get; set; }
 
     private void Awake()
     {
@@ -61,21 +61,12 @@ public class PlayerController : MonoBehaviour
         InputManager.instance.OnSlide -= OnSlide;
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.GetComponent<Lane>() != null) // Player is on a lane
-        {
-            CanChangeLane = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other) // Player can't interact while changing lane
-    {
-        CanChangeLane = false;
-    }
-
     private void FixedUpdate()
     {
+        if (!_animatorManager.IsJumping && !_animatorManager.IsSliding && _animatorManager.PlayerCanInteract)
+        { 
+            SetCollider((int)BodyCollider.Stand);
+        }
         _movementManager.Move(_LaneSpeed, _laneSystem.GetLane());
         _movementManager.Jump(_FallSpeed, _JumpHeight, _JumpSpeed);
         _movementManager.Slide();
@@ -95,7 +86,7 @@ public class PlayerController : MonoBehaviour
     {
         if(_animatorManager.PlayerCanInteract)
         {
-            IsJumping = true;
+            SetCollider((int)BodyCollider.Jump);
         }
     }
 
@@ -103,7 +94,17 @@ public class PlayerController : MonoBehaviour
     {
         if(_animatorManager.PlayerCanInteract)
         {
-            IsSliding = true;
+            SetCollider((int)BodyCollider.Slide);
         }
     }
+
+    private void SetCollider(int value)
+    {
+        foreach (GameObject col in bodyColliders)
+        {
+            col.SetActive(false);
+        }
+        bodyColliders[value].SetActive(true);
+    }
+
 }

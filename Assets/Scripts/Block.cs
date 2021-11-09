@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Block : MonoBehaviour
+public sealed class Block : MonoBehaviour
 {
     public BlockSpawner spawner;
     private float _deathValue = 113;

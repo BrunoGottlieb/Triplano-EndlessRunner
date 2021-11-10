@@ -6,7 +6,7 @@ public sealed class BlockSpawner : MonoBehaviour
 {
     public Transform[] blocks;
     public float initialSpeed = 10;
-    private float _spawnPos = -124.5f;
+    private float _spawnPos = -124;
     public float CurrentSpeed { get; set; }
 
     public void Init(float speed)

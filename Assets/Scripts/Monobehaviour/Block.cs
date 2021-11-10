@@ -5,7 +5,7 @@ using UnityEngine;
 public sealed class Block : MonoBehaviour
 {
     public BlockSpawner spawner;
-    private float _deathValue = 113;
+    private float _deathValue = 110.3f;
 
     private void FixedUpdate()
     {

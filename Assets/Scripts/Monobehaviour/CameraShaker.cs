@@ -2,7 +2,7 @@ using Cinemachine;
 using System.Collections;
 using UnityEngine;
 
-public class CameraShaker : MonoBehaviour
+public sealed class CameraShaker : MonoBehaviour
 {
     private static CameraShaker _instance;
     public static CameraShaker Instance { get { return _instance; } }

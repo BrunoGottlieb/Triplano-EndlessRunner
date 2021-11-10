@@ -5,5 +5,7 @@ using UnityEngine;
 public interface ICollectable
 {
     public abstract void Collect();
+    public abstract void EnableMe();
+    public abstract void DisableMe();
     public CollectableIndicator GetCollectableIndicator();
 }

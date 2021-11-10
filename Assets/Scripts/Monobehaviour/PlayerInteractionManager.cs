@@ -4,7 +4,8 @@ using UnityEngine;
 
 public sealed class PlayerInteractionManager : MonoBehaviour
 {
-    public CollectableOnUI coinUIEffect;
+    [SerializeField] private CollectableOnUI _coinUIEffect;
+    [SerializeField] private LeadboardScreen _leadboardScreen;
 
     private PlayerController _controller;
     private PlayerAnimationManager _animationManager;
@@ -31,6 +32,7 @@ public sealed class PlayerInteractionManager : MonoBehaviour
                 _animationManager.Die();
                 CameraShaker.Instance.Shake(2, 5, 0.2f);
                 BlockSpawner.Instance.StopAllBlocks();
+                _leadboardScreen.gameObject.SetActive(true);
             }
         }
 
@@ -38,7 +40,7 @@ public sealed class PlayerInteractionManager : MonoBehaviour
         if (collectable != null)
         {
             collectable.Collect();
-            coinUIEffect.PlayEffect(collectable.GetCollectableIndicator());
+            _coinUIEffect.PlayEffect(collectable.GetCollectableIndicator());
         }
     }
 

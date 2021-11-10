@@ -1228,7 +1228,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawner: {fileID: 0}
-  contentGroup: []
+  contentGroup:
+  - {fileID: 6502828508920410132}
+  - {fileID: 3557056769591872364}
+  - {fileID: 5641797221656292056}
+  - {fileID: 5617536291357179615}
 --- !u!1 &4753812798129046045
 GameObject:
   m_ObjectHideFlags: 0
@@ -26673,6 +26677,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0b09b60ce6a2c5e489533006490d4a98, type: 3}
+--- !u!1 &3557056769591872364 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1701642966796983285, guid: 0b09b60ce6a2c5e489533006490d4a98, type: 3}
+  m_PrefabInstance: {fileID: 2792309877632258201}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3557056769591872367 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1701642966796983286, guid: 0b09b60ce6a2c5e489533006490d4a98, type: 3}
@@ -26739,6 +26748,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 182b5acace30a0b46b226d732bedc29b, type: 3}
+--- !u!1 &5641797221656292056 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9182206404113367549, guid: 182b5acace30a0b46b226d732bedc29b, type: 3}
+  m_PrefabInstance: {fileID: 3541642115113380645}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1234243846233802188 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2307701735300214505, guid: 182b5acace30a0b46b226d732bedc29b, type: 3}
@@ -26805,6 +26819,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9a93d4efc321924fb13572043528a78, type: 3}
+--- !u!1 &6502828508920410132 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7022359301553749968, guid: c9a93d4efc321924fb13572043528a78, type: 3}
+  m_PrefabInstance: {fileID: 4272471869715550148}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &384471178990477056 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4476353761331433668, guid: c9a93d4efc321924fb13572043528a78, type: 3}
@@ -26820,6 +26839,10 @@ PrefabInstance:
     - target: {fileID: 255846331670753072, guid: b32fba3f7493e4d4dad916ad2b9da979, type: 3}
       propertyPath: m_Name
       value: Obstacles and Collectables - Easy 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 255846331670753072, guid: b32fba3f7493e4d4dad916ad2b9da979, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6694504575655985188, guid: b32fba3f7493e4d4dad916ad2b9da979, type: 3}
       propertyPath: m_RootOrder
@@ -26867,6 +26890,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b32fba3f7493e4d4dad916ad2b9da979, type: 3}
+--- !u!1 &5617536291357179615 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 255846331670753072, guid: b32fba3f7493e4d4dad916ad2b9da979, type: 3}
+  m_PrefabInstance: {fileID: 5654706509962531311}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1341551439517061579 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6694504575655985188, guid: b32fba3f7493e4d4dad916ad2b9da979, type: 3}

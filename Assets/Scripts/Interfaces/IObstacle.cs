@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IObstacle
 {
-    public abstract bool TakeDamage();
+    public abstract int TakeDamage();
 }

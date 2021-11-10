@@ -14,8 +14,11 @@ public sealed class PlayerMovementManager : MonoBehaviour
     }
     public void Move(float speed, Vector3 destination) // Called by Player Controller FixedUpdate | Change between lanes
     {
-        float step = speed * Time.deltaTime;
-        this.transform.position = Vector3.MoveTowards(transform.position, destination, step);
+        if(!_animator.IsDead)
+        {
+            float step = speed * Time.deltaTime;
+            this.transform.position = Vector3.MoveTowards(transform.position, destination, step);
+        }
     }
 
     public void Jump(float fallSpeed, float jumpHeight, float jumpSpeed)

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class DamageableObstacle : MonoBehaviour, IObstacle
 {
-    public bool TakeDamage()
+    public int TakeDamage()
     {
-        return false;
+        return 1;
     }
 
 }

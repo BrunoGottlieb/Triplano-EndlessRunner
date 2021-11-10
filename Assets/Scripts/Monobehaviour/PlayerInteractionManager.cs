@@ -20,7 +20,18 @@ public sealed class PlayerInteractionManager : MonoBehaviour
         IObstacle obstacle = other.GetComponent<IObstacle>();
         if (obstacle != null)
         {
-            _animationManager.SetDamage();
+            int damage = obstacle.TakeDamage();
+            int newLifeValue = StatsSystem.Instance.ApplyDamage(damage);
+            if(newLifeValue > 0)
+            {
+                _animationManager.Damage();
+            }
+            else
+            {
+                _animationManager.Die();
+                CameraShaker.Instance.Shake(2, 5, 0.2f);
+                BlockSpawner.Instance.StopAllBlocks();
+            }
         }
 
         ICollectable collectable = other.GetComponent<ICollectable>();

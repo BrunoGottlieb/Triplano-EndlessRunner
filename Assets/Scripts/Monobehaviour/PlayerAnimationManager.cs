@@ -4,11 +4,13 @@ using UnityEngine;
 
 public sealed class PlayerAnimationManager : MonoBehaviour
 {
+    [SerializeField] private GameObject deathEffect;
     private Animator _anim;
 
-    public bool PlayerCanInteract { get { return _anim.GetBool("CanInteract"); } }
+    public bool PlayerCanInteract { get { return _anim.GetBool("CanInteract") && !_anim.GetBool("IsDead"); } }
     public bool IsJumping { get { return _anim.GetBool("IsJumping"); } }
     public bool IsSliding { get { return _anim.GetBool("IsSliding"); } }
+    public bool IsDead { get { return _anim.GetBool("IsDead"); } }
 
     private void Awake()
     {
@@ -43,7 +45,7 @@ public sealed class PlayerAnimationManager : MonoBehaviour
         }
     }
 
-    public void SetDamage()
+    public void Damage()
     {
         _anim.SetTrigger("Damage");
     }
@@ -55,7 +57,11 @@ public sealed class PlayerAnimationManager : MonoBehaviour
 
     public void Die()
     {
-        _anim.SetBool("IsDead", true);
+        if(!IsDead)
+        {
+            deathEffect.SetActive(true);
+            _anim.SetBool("IsDead", true);
+        }
     }
 
 }

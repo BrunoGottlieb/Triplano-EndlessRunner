@@ -6,6 +6,10 @@ public sealed class StatsSystem : MonoBehaviour
 {
     private static StatsSystem _instance;
     public static StatsSystem Instance { get { return _instance; } }
+    [SerializeField] private PlayerAnimationManager player;
+
+    [Header("Control")]
+    [SerializeField] private int maxEnergy;
 
     [Header("Texts")]
     [SerializeField] private TextMeshProUGUI goldText;
@@ -41,11 +45,12 @@ public sealed class StatsSystem : MonoBehaviour
     private void Start()
     {
         StartCoroutine(IncreaseDistance());
+        energyText.text = maxEnergy.ToString() + "/" + maxEnergy.ToString();
     }
 
     private IEnumerator IncreaseDistance()
     {
-        while(true)
+        while(!player.IsDead)
         {
             yield return new WaitForSeconds(0.3f);
             _Distance++;
@@ -69,6 +74,13 @@ public sealed class StatsSystem : MonoBehaviour
     {
         _Energy += value;
         energyText.text = _Energy.ToString();
+    }
+
+    public int ApplyDamage(int value)
+    {
+        int newEnergy = Mathf.Clamp((_Energy - value), 0, 100);
+        energyText.text = newEnergy.ToString() + "/" + maxEnergy.ToString();
+        return _Energy = newEnergy;
     }
 
 }

@@ -17,14 +17,14 @@ public sealed class PlayerAnimationManager : MonoBehaviour
 
     private void OnEnable()
     {
-        InputManager.instance.OnJump += SetJump;
-        InputManager.instance.OnSlide += SetSlide;
+        InputManager.Instance.OnJump += SetJump;
+        InputManager.Instance.OnSlide += SetSlide;
     }
 
     private void OnDisable()
     {
-        InputManager.instance.OnJump -= SetJump;
-        InputManager.instance.OnSlide -= SetSlide;
+        InputManager.Instance.OnJump -= SetJump;
+        InputManager.Instance.OnSlide -= SetSlide;
     }
 
     private void SetJump()

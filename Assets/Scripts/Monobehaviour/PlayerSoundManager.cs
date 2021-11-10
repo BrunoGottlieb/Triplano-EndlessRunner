@@ -13,7 +13,7 @@ public sealed class PlayerSoundManager : MonoBehaviour
 
     private void Awake()
     {
-        _inputManager = InputManager.instance;
+        _inputManager = InputManager.Instance;
         _inputManager.OnSlide += PlaySlideSound;
         _inputManager.OnJump += PlayJumpSound;
         _inputManager.OnMoveLeft += PlayAirSound;

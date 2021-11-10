@@ -4,6 +4,8 @@ using UnityEngine;
 
 public sealed class PlayerInteractionManager : MonoBehaviour
 {
+    public CollectableOnUI coinUIEffect;
+
     private PlayerController _controller;
     private PlayerAnimationManager _animationManager;
 
@@ -18,12 +20,15 @@ public sealed class PlayerInteractionManager : MonoBehaviour
         IObstacle obstacle = other.GetComponent<IObstacle>();
         if (obstacle != null)
         {
-            print("Death");
             _animationManager.SetDamage();
         }
 
         ICollectable collectable = other.GetComponent<ICollectable>();
-        collectable?.Collect();
+        if (collectable != null)
+        {
+            collectable.Collect();
+            coinUIEffect.PlayEffect(collectable.GetCollectableIndicator());
+        }
     }
 
     private void OnTriggerStay(Collider other)

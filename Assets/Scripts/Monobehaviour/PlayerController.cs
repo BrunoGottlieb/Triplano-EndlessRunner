@@ -47,18 +47,18 @@ public sealed class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        InputManager.instance.OnMoveLeft += OnMoveLeft;
-        InputManager.instance.OnMoveRight += OnMoveRight;
-        InputManager.instance.OnJump += OnJump;
-        InputManager.instance.OnSlide += OnSlide;
+        InputManager.Instance.OnMoveLeft += OnMoveLeft;
+        InputManager.Instance.OnMoveRight += OnMoveRight;
+        InputManager.Instance.OnJump += OnJump;
+        InputManager.Instance.OnSlide += OnSlide;
     }
 
     private void OnDisable()
     {
-        InputManager.instance.OnMoveLeft -= OnMoveLeft;
-        InputManager.instance.OnMoveRight -= OnMoveRight;
-        InputManager.instance.OnJump -= OnJump;
-        InputManager.instance.OnSlide -= OnSlide;
+        InputManager.Instance.OnMoveLeft -= OnMoveLeft;
+        InputManager.Instance.OnMoveRight -= OnMoveRight;
+        InputManager.Instance.OnJump -= OnJump;
+        InputManager.Instance.OnSlide -= OnSlide;
     }
 
     private void FixedUpdate()

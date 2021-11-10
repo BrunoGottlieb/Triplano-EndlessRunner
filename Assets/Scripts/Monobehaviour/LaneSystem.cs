@@ -16,14 +16,14 @@ public sealed class LaneSystem : MonoBehaviour
 
     private void OnEnable()
     {
-        InputManager.instance.OnMoveRight += DecreaseCurrentLane;
-        InputManager.instance.OnMoveLeft += IncreaseCurrentLane;
+        InputManager.Instance.OnMoveRight += DecreaseCurrentLane;
+        InputManager.Instance.OnMoveLeft += IncreaseCurrentLane;
     }
 
     private void OnDisable()
     {
-        InputManager.instance.OnMoveRight -= DecreaseCurrentLane;
-        InputManager.instance.OnMoveLeft -= IncreaseCurrentLane;
+        InputManager.Instance.OnMoveRight -= DecreaseCurrentLane;
+        InputManager.Instance.OnMoveLeft -= IncreaseCurrentLane;
     }
 
     private void IncreaseCurrentLane() // Called on right input

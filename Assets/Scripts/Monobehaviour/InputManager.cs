@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 [DefaultExecutionOrder(-1)]
 public sealed class InputManager : MonoBehaviour
 {
-    public static InputManager instance;
+    private static InputManager _instance;
+    public static InputManager Instance { get { return _instance; } }
 
     public delegate void StartTouch(Vector2 position, float time);
     public event StartTouch OnStartTouch;
@@ -22,7 +23,14 @@ public sealed class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this.GetComponent<InputManager>();
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
         _playerControls = new PlayerControls();
     }
 

@@ -2,11 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-[DefaultExecutionOrder(-1)]
 public sealed class SwipeDetection : MonoBehaviour
 {
-    public static SwipeDetection instance;
-
     [SerializeField] float minimumDistance = 0.2f;
     [SerializeField] float maximumTime = 1f;
     [SerializeField, Range(0,1)] float directionThreshold = 0.9f;
@@ -15,22 +12,16 @@ public sealed class SwipeDetection : MonoBehaviour
     private Vector2 _endPosition;
     private float _startTime;
     private float _endTime;
-
-    private void Awake()
-    {
-        instance = this.GetComponent<SwipeDetection>();
-    }
-
     private void OnEnable()
     {
-        InputManager.instance.OnStartTouch += SwipeStart;
-        InputManager.instance.OnEndTouch += SwipeEnd;
+        InputManager.Instance.OnStartTouch += SwipeStart;
+        InputManager.Instance.OnEndTouch += SwipeEnd;
     }
 
     private void OnDisable()
     {
-        InputManager.instance.OnStartTouch -= SwipeStart;
-        InputManager.instance.OnEndTouch -= SwipeEnd;
+        InputManager.Instance.OnStartTouch -= SwipeStart;
+        InputManager.Instance.OnEndTouch -= SwipeEnd;
     }
 
     private void SwipeStart(Vector2 position, float time) // Start touching the screen
@@ -61,19 +52,19 @@ public sealed class SwipeDetection : MonoBehaviour
     {
         if(Vector2.Dot(Vector2.up, direction) > directionThreshold)
         {
-            InputManager.instance.Jump();
+            InputManager.Instance.Jump();
         }
         else if (Vector2.Dot(Vector2.left, direction) > directionThreshold)
         {
-            InputManager.instance.MoveLeft();
+            InputManager.Instance.MoveLeft();
         }
         else if (Vector2.Dot(Vector2.right, direction) > directionThreshold)
         {
-            InputManager.instance.MoveRight();
+            InputManager.Instance.MoveRight();
         }
         else if (Vector2.Dot(Vector2.down, direction) > directionThreshold)
         {
-            InputManager.instance.Slide();
+            InputManager.Instance.Slide();
         }
         else
         {

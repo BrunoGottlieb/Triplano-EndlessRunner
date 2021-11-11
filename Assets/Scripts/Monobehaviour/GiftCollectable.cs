@@ -7,7 +7,7 @@ public class GiftCollectable : MonoBehaviour, ICollectable
     [SerializeField] private GameObject _mesh;
     [SerializeField] private GameObject _visualEffect;
     [SerializeField] private CollectableIndicator _indicator;
-    private bool HasBeenCollected { get; set; }
+    public bool HasBeenCollected { get; set; }
     public void Collect() // Triggered by player interaction
     {
         if(!HasBeenCollected)

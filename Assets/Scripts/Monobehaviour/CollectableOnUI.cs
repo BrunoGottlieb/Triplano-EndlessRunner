@@ -9,6 +9,11 @@ public class CollectableOnUI : MonoBehaviour
     private Vector2 _targetPos;
     private Image _image;
 
+    public bool isMoving;
+    public float distance;
+
+    public bool IsMoving { get; set; }
+
     private void Awake()
     {
         _image = this.GetComponent<Image>();
@@ -22,6 +27,7 @@ public class CollectableOnUI : MonoBehaviour
         this.gameObject.SetActive(true);
         transform.localPosition = Vector3.zero;
         transform.LeanMoveLocal(_targetPos, 0.2f);
+        IsMoving = true;
     }
 
     private Vector2 GetTargetPosition()
@@ -35,7 +41,7 @@ public class CollectableOnUI : MonoBehaviour
             case "Energy":
                 return StatsSystem.Instance.EnergyPosition;
             default:
-                Debug.Log("Type was not set on the CollectableIndicator");
+                Debug.LogError("Target was not set on the CollectableIndicator");
                 break;
         }
         return Vector2.zero;
@@ -55,7 +61,7 @@ public class CollectableOnUI : MonoBehaviour
                 StatsSystem.Instance.UpdateEnergy(1);
                 break;
             default:
-                Debug.Log("Type was not set on the CollectableIndicator");
+                Debug.LogError("Type was not set on the CollectableIndicator");
                 break;
         }
 
@@ -63,10 +69,13 @@ public class CollectableOnUI : MonoBehaviour
 
     private void Update()
     {
-        if(Vector2.Distance(this.transform.localPosition, _targetPos) < 0.1f)
+        if (Vector2.Distance(this.transform.localPosition, _targetPos) < 10)
         {
             UpdateStats();
+            IsMoving = false;
             this.gameObject.SetActive(false);
         }
+        distance = Vector2.Distance(this.transform.localPosition, _targetPos);
+        isMoving = IsMoving;
     }
 }

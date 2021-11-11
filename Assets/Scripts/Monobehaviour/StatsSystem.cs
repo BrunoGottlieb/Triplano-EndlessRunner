@@ -58,22 +58,31 @@ public sealed class StatsSystem : MonoBehaviour
         }
     }
 
+    private void ApplyTextScaleEffect(Transform obj)
+    {
+        obj.transform.LeanScale(new Vector3(1.5f, 1.5f, 1.5f), 0.25f);
+        obj.transform.LeanScale(new Vector3(1, 1, 1), 0.2f).setDelay(0.25f);
+    }
+
     public void UpdateGold(int value)
     {
         _Gold += value;
         goldText.text = _Gold.ToString();
+        ApplyTextScaleEffect(goldText.transform);
     }
 
     public void UpdateGem(int value)
     {
         _Gem += value;
         gemText.text = _Gem.ToString();
+        ApplyTextScaleEffect(gemText.transform);
     }
 
     public void UpdateEnergy(int value)
     {
         _Energy += value;
         energyText.text = _Energy.ToString();
+        ApplyTextScaleEffect(energyText.transform);
     }
 
     public int ApplyDamage(int value)

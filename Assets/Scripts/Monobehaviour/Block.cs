@@ -38,6 +38,7 @@ public sealed class Block : MonoBehaviour
             {
                 //spawner.SendNextBlock();
                 this.transform.localPosition = new Vector3(spawner.SpawnPos, 0, 0);
+                ChooseContent();
             }
         }
     }

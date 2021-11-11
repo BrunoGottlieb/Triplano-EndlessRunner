@@ -4,7 +4,7 @@ using UnityEngine;
 
 public sealed class PlayerInteractionManager : MonoBehaviour
 {
-    [SerializeField] private CollectableOnUI _coinUIEffect;
+    [SerializeField] private CollectableOnUI[] _coinUIEffect;
     [SerializeField] private LeadboardScreen _leadboardScreen;
 
     private PlayerController _controller;
@@ -39,8 +39,12 @@ public sealed class PlayerInteractionManager : MonoBehaviour
         ICollectable collectable = other.GetComponent<ICollectable>();
         if (collectable != null)
         {
-            collectable.Collect();
-            _coinUIEffect.PlayEffect(collectable.GetCollectableIndicator());
+            if(!collectable.HasBeenCollected)
+            {
+                collectable.Collect();
+                CollectableOnUI effect = !_coinUIEffect[0].isMoving ? _coinUIEffect[0] : _coinUIEffect[1];
+                effect.PlayEffect(collectable.GetCollectableIndicator());
+            }
         }
     }
 

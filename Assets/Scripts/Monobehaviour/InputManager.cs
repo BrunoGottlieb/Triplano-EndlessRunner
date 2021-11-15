@@ -13,6 +13,8 @@ public sealed class InputManager : MonoBehaviour
     public event StartTouch OnStartTouch;
     public delegate void EndTouch(Vector2 position, float time);
     public event EndTouch OnEndTouch;
+    public delegate void CurrentTouch(Vector2 position, float time);
+    public event CurrentTouch OnCurrentTouch;
 
     public Action OnMoveLeft;
     public Action OnMoveRight;
@@ -48,6 +50,7 @@ public sealed class InputManager : MonoBehaviour
     {
         _playerControls.Touch.PrimaryContact.started += context => StartTouchPrimary(context);
         _playerControls.Touch.PrimaryContact.canceled += context => EndTouchPrimary(context);
+        _playerControls.Touch.CurrentPosition.performed += context => CurrentTouchPosition(context);
 
         _playerControls.Keyboard.LeftArrow.performed += context => MoveLeft();
         _playerControls.Keyboard.RightArrow.performed += context => MoveRight();
@@ -63,6 +66,11 @@ public sealed class InputManager : MonoBehaviour
     private void EndTouchPrimary(InputAction.CallbackContext context)
     {
         OnEndTouch?.Invoke(_playerControls.Touch.PrimaryPosition.ReadValue<Vector2>(), (float)context.time);
+    }
+
+    private void CurrentTouchPosition(InputAction.CallbackContext context)
+    {
+        OnCurrentTouch?.Invoke(_playerControls.Touch.CurrentPosition.ReadValue<Vector2>(), (float)context.time);
     }
 
     public void MoveLeft()

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using System.Reflection;
 
 public static class EditorExtensions {
-
-	public static void SaveTexture(Sprite sprite, string path, string name)
+#if UNITY_EDITOR
+    public static void SaveTexture(Sprite sprite, string path, string name)
     {
         byte[] bytes = sprite.texture.EncodeToPNG();
         File.WriteAllBytes(path + "/" + name + ".png", bytes);
@@ -22,4 +24,5 @@ public static class EditorExtensions {
         object obj = getActiveFolderPath.Invoke(null, new object[0]);
         return obj.ToString();
     }
+#endif
 }

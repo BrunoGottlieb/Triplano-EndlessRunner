@@ -33,6 +33,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""CurrentPosition"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""2aa1e593-4702-48dc-af1c-c99295691da3"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -55,6 +63,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""PrimaryPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6aac64cf-8546-475b-9acb-e9365088dce6"",
+                    ""path"": ""<Touchscreen>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CurrentPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -217,6 +236,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Touch = asset.FindActionMap("Touch", throwIfNotFound: true);
         m_Touch_PrimaryContact = m_Touch.FindAction("PrimaryContact", throwIfNotFound: true);
         m_Touch_PrimaryPosition = m_Touch.FindAction("PrimaryPosition", throwIfNotFound: true);
+        m_Touch_CurrentPosition = m_Touch.FindAction("CurrentPosition", throwIfNotFound: true);
         // Keyboard
         m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
         m_Keyboard_LeftArrow = m_Keyboard.FindAction("LeftArrow", throwIfNotFound: true);
@@ -274,12 +294,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private ITouchActions m_TouchActionsCallbackInterface;
     private readonly InputAction m_Touch_PrimaryContact;
     private readonly InputAction m_Touch_PrimaryPosition;
+    private readonly InputAction m_Touch_CurrentPosition;
     public struct TouchActions
     {
         private @PlayerControls m_Wrapper;
         public TouchActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @PrimaryContact => m_Wrapper.m_Touch_PrimaryContact;
         public InputAction @PrimaryPosition => m_Wrapper.m_Touch_PrimaryPosition;
+        public InputAction @CurrentPosition => m_Wrapper.m_Touch_CurrentPosition;
         public InputActionMap Get() { return m_Wrapper.m_Touch; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -295,6 +317,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @PrimaryPosition.started -= m_Wrapper.m_TouchActionsCallbackInterface.OnPrimaryPosition;
                 @PrimaryPosition.performed -= m_Wrapper.m_TouchActionsCallbackInterface.OnPrimaryPosition;
                 @PrimaryPosition.canceled -= m_Wrapper.m_TouchActionsCallbackInterface.OnPrimaryPosition;
+                @CurrentPosition.started -= m_Wrapper.m_TouchActionsCallbackInterface.OnCurrentPosition;
+                @CurrentPosition.performed -= m_Wrapper.m_TouchActionsCallbackInterface.OnCurrentPosition;
+                @CurrentPosition.canceled -= m_Wrapper.m_TouchActionsCallbackInterface.OnCurrentPosition;
             }
             m_Wrapper.m_TouchActionsCallbackInterface = instance;
             if (instance != null)
@@ -305,6 +330,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @PrimaryPosition.started += instance.OnPrimaryPosition;
                 @PrimaryPosition.performed += instance.OnPrimaryPosition;
                 @PrimaryPosition.canceled += instance.OnPrimaryPosition;
+                @CurrentPosition.started += instance.OnCurrentPosition;
+                @CurrentPosition.performed += instance.OnCurrentPosition;
+                @CurrentPosition.canceled += instance.OnCurrentPosition;
             }
         }
     }
@@ -370,6 +398,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     {
         void OnPrimaryContact(InputAction.CallbackContext context);
         void OnPrimaryPosition(InputAction.CallbackContext context);
+        void OnCurrentPosition(InputAction.CallbackContext context);
     }
     public interface IKeyboardActions
     {

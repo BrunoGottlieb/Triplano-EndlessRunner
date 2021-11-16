@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public sealed class LeadboardScreen : MonoBehaviour
@@ -7,12 +6,11 @@ public sealed class LeadboardScreen : MonoBehaviour
     [SerializeField] private Transform _panel;
     [SerializeField] private CanvasGroup _blackout;
     [SerializeField] private Button _restartBtn;
-    [SerializeField] private GameObject _loadingScreen;
+    [SerializeField] private SceneLoader _sceneLoader;
 
     private void Awake()
     {
         _restartBtn.onClick.AddListener(ReloadScene);
-        _loadingScreen.SetActive(false);
     }
 
     private void OnEnable()
@@ -23,7 +21,6 @@ public sealed class LeadboardScreen : MonoBehaviour
 
     private void ReloadScene()
     {
-        _loadingScreen.SetActive(true);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        _sceneLoader.ReloadScene();
     }
 }

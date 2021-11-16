@@ -822,11 +822,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1640704151614535594, guid: cfde4e0ec21843e4481d07e7e7e2e6b5, type: 3}
   m_PrefabInstance: {fileID: 420131548}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &446328753 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1977187895462292675, guid: 5a9c515c366a2a04c9b5031d7833aad3, type: 3}
-  m_PrefabInstance: {fileID: 1626528728}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &471750528
 GameObject:
   m_ObjectHideFlags: 0
@@ -2816,7 +2811,7 @@ MonoBehaviour:
   _panel: {fileID: 549747906}
   _blackout: {fileID: 1021591963}
   _restartBtn: {fileID: 34949685}
-  _loadingScreen: {fileID: 446328753}
+  _sceneLoader: {fileID: 1626528730}
 --- !u!1 &1374610005
 GameObject:
   m_ObjectHideFlags: 0
@@ -3402,6 +3397,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2114398270}
     m_Modifications:
+    - target: {fileID: 1972394733330782123, guid: 5a9c515c366a2a04c9b5031d7833aad3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1977187895462292674, guid: 5a9c515c366a2a04c9b5031d7833aad3, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3488,11 +3487,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1977187895462292675, guid: 5a9c515c366a2a04c9b5031d7833aad3, type: 3}
       propertyPath: m_Name
-      value: Loading Screen
+      value: Loading Manager
       objectReference: {fileID: 0}
     - target: {fileID: 1977187895462292675, guid: 5a9c515c366a2a04c9b5031d7833aad3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a9c515c366a2a04c9b5031d7833aad3, type: 3}
@@ -3501,6 +3500,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1977187895462292674, guid: 5a9c515c366a2a04c9b5031d7833aad3, type: 3}
   m_PrefabInstance: {fileID: 1626528728}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1626528730 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2394443443427228407, guid: 5a9c515c366a2a04c9b5031d7833aad3, type: 3}
+  m_PrefabInstance: {fileID: 1626528728}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb43d7f8834e48a40b2b5ec55f50cbc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1629555354
 GameObject:
   m_ObjectHideFlags: 0

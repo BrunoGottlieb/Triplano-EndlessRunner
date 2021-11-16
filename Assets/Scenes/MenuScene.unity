@@ -708,11 +708,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 435358099}
   m_Mesh: {fileID: 4300004, guid: 50cd9dbbc12013f42b88f3ffbd25ce7d, type: 3}
---- !u!1 &436699748 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1977187895462292675, guid: 5a9c515c366a2a04c9b5031d7833aad3, type: 3}
-  m_PrefabInstance: {fileID: 1977187895294619303}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &436699749 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1977187895462292674, guid: 5a9c515c366a2a04c9b5031d7833aad3, type: 3}
@@ -1107,7 +1102,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 579028852}
-  m_LocalRotation: {x: 0.01278428, y: -0.48392704, z: 0.0070705763, w: 0.8749864}
+  m_LocalRotation: {x: 0.012784284, y: -0.48392704, z: 0.007070579, w: 0.8749864}
   m_LocalPosition: {x: -71.63601, y: 3.6848001, z: 53.572998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1659,10 +1654,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cam1: {fileID: 1948092913}
   _screen: {fileID: 596984136}
+  sceneLoader: {fileID: 1977187895294619304}
   _playButton: {fileID: 886975333}
   _exitButton: {fileID: 537832709}
-  _loadingScreen: {fileID: 436699748}
-  _loadingSlider: {fileID: 871531012}
 --- !u!4 &835292192
 Transform:
   m_ObjectHideFlags: 0
@@ -1677,17 +1671,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &871531012 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1977187896126237859, guid: 5a9c515c366a2a04c9b5031d7833aad3, type: 3}
-  m_PrefabInstance: {fileID: 1977187895294619303}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &886975329
 GameObject:
   m_ObjectHideFlags: 0
@@ -7300,10 +7283,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1977187895462292675, guid: 5a9c515c366a2a04c9b5031d7833aad3, type: 3}
       propertyPath: m_Name
-      value: Loading Screen
+      value: Loading Manager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a9c515c366a2a04c9b5031d7833aad3, type: 3}
+--- !u!114 &1977187895294619304 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2394443443427228407, guid: 5a9c515c366a2a04c9b5031d7833aad3, type: 3}
+  m_PrefabInstance: {fileID: 1977187895294619303}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb43d7f8834e48a40b2b5ec55f50cbc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1998674605112653381
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,8 +21,8 @@ RenderSettings:
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.8329477, g: 0.8462385, b: 0.9245283, a: 1}
-  m_AmbientEquatorColor: {r: 0.5154415, g: 0.6653485, b: 0.764151, a: 1}
-  m_AmbientGroundColor: {r: 0.07345984, g: 0.067506224, b: 0.3490566, a: 1}
+  m_AmbientEquatorColor: {r: 0.6850303, g: 0.7619886, b: 0.8113208, a: 1}
+  m_AmbientGroundColor: {r: 0.03336744, g: 0.028390896, b: 0.20754719, a: 1}
   m_AmbientIntensity: 1
   m_AmbientMode: 1
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
@@ -628,6 +628,10 @@ PrefabInstance:
       propertyPath: spawner
       value: 
       objectReference: {fileID: 1983264480}
+    - target: {fileID: 4753812798098603402, guid: 2e282fb0b8b660545ae28ee2109656b1, type: 3}
+      propertyPath: debugStage
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4753812798098603403, guid: 2e282fb0b8b660545ae28ee2109656b1, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -14365,6 +14369,10 @@ PrefabInstance:
       propertyPath: spawner
       value: 
       objectReference: {fileID: 1983264480}
+    - target: {fileID: 4753812798098603402, guid: 2e282fb0b8b660545ae28ee2109656b1, type: 3}
+      propertyPath: debugStage
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4753812798098603403, guid: 2e282fb0b8b660545ae28ee2109656b1, type: 3}
       propertyPath: m_RootOrder
       value: 0

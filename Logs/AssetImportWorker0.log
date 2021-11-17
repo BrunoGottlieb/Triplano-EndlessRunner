@@ -1556,3 +1556,139 @@ Total: 3.494400 ms (FindLiveObjects: 0.366800 ms CreateObjectMapping: 0.169100 m
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.002023 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.47 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.264 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.26 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2883 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 167.6 MB.
+System memory in use after: 167.8 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 3836.
+Total: 4.519800 ms (FindLiveObjects: 0.374100 ms CreateObjectMapping: 0.175600 ms MarkObjects: 3.950300 ms  DeleteObjects: 0.018300 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Import Request.
+  Time since last request: 484.894995 seconds.
+  path: Assets/Prefabs/Blocks/Farm Block.prefab
+  artifactKey: Guid(2e282fb0b8b660545ae28ee2109656b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Blocks/Farm Block.prefab using Guid(2e282fb0b8b660545ae28ee2109656b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4f4581ebfe4bc06209baca7f18f69eea') in 1.037446 seconds
+  Import took 1.126108 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.002043 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 2.60 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.500 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 0.96 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2883 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 171.4 MB.
+System memory in use after: 171.6 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 3875.
+Total: 3.485500 ms (FindLiveObjects: 0.339800 ms CreateObjectMapping: 0.153800 ms MarkObjects: 2.971700 ms  DeleteObjects: 0.018400 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.002160 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.99 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.372 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 3.27 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2883 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 171.4 MB.
+System memory in use after: 171.7 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 3878.
+Total: 2.572400 ms (FindLiveObjects: 0.328500 ms CreateObjectMapping: 0.140200 ms MarkObjects: 2.087700 ms  DeleteObjects: 0.014500 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.002056 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.87 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.475 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.08 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2883 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 171.5 MB.
+System memory in use after: 171.7 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 3881.
+Total: 2.822200 ms (FindLiveObjects: 0.353400 ms CreateObjectMapping: 0.143600 ms MarkObjects: 2.309000 ms  DeleteObjects: 0.015100 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Import Request.
+  Time since last request: 2007.741898 seconds.
+  path: Assets/Scenes/EndlessScene.unity
+  artifactKey: Guid(ebbb2b7ec113313418e6f599ee0831a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/EndlessScene.unity using Guid(ebbb2b7ec113313418e6f599ee0831a0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '246f35faaa1b440546f3b694197e185a') in 0.022984 seconds
+  Import took 0.068396 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 398.242021 seconds.
+  path: Assets/Prefabs/Block Interior/Obstacles and Collectables - Hard 3.prefab
+  artifactKey: Guid(3378cf468088868408688d7ba80e00ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Block Interior/Obstacles and Collectables - Hard 3.prefab using Guid(3378cf468088868408688d7ba80e00ca) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9377c793cc9c4b727102387438993f9f') in 0.418292 seconds
+  Import took 0.434660 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000297 seconds.
+  path: Assets/Prefabs/Block Interior/Obstacles and Collectables - Medium 3.prefab
+  artifactKey: Guid(b0f5750900ca0c2488f6ee46b40c2ed5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Block Interior/Obstacles and Collectables - Medium 3.prefab using Guid(b0f5750900ca0c2488f6ee46b40c2ed5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6251539f7866e062e6d2039fbad15b1d') in 0.105619 seconds
+  Import took 0.156378 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 113.831010 seconds.
+  path: Assets/Prefabs/Blocks/Farm Block.prefab
+  artifactKey: Guid(2e282fb0b8b660545ae28ee2109656b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Blocks/Farm Block.prefab using Guid(2e282fb0b8b660545ae28ee2109656b1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '470f8f0f46a939a5168667766677e3ce') in 0.862290 seconds
+  Import took 0.993324 seconds .
+

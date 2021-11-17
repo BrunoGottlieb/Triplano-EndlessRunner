@@ -20,7 +20,6 @@ public sealed class LeadboardScreen : MonoBehaviour
     [SerializeField] private SceneLoader _sceneLoader;
     [SerializeField] private StatsSystem _statsSystem;
 
-
     private void Awake()
     {
         _restartBtn.onClick.AddListener(ReloadScene);
@@ -46,7 +45,7 @@ public sealed class LeadboardScreen : MonoBehaviour
         _bestScoreText.text = "Best score: " + bestScore.ToString("00000") + "m";
     }
 
-    IEnumerator ShowBestScoreBandage()
+    IEnumerator ShowBestScoreBandage() // When player' score is the new best one
     {
         yield return new WaitForSeconds(2);
         _newBestScoreBandage.transform.localScale = new Vector3(10, 10, 10);

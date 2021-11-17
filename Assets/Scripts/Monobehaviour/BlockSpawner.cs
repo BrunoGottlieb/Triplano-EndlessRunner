@@ -23,6 +23,7 @@ public sealed class BlockSpawner : MonoBehaviour
     {
         if (_instance != null && _instance != this)
         {
+            Debug.LogError("Not supposed to have more than 1 BlockSpawner on scene");
             Destroy(this.gameObject);
         }
         else
@@ -32,15 +33,6 @@ public sealed class BlockSpawner : MonoBehaviour
         CurrentSpeed = initialSpeed;
     }
 
-    private IEnumerator IncreaseSpeed(float interval, float increment)
-    {
-        while(true)
-        {
-            yield return new WaitForSeconds(interval);
-            CurrentSpeed += increment;
-        }
-    }
-
     public void StopAllBlocks()
     {
         foreach(Block block in blocks)
@@ -48,6 +40,15 @@ public sealed class BlockSpawner : MonoBehaviour
             block.IsEnabled = false;
         }
     }
+
+    /*private IEnumerator IncreaseSpeed(float interval, float increment)
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(interval);
+            CurrentSpeed += increment;
+        }
+    }*/
 
     /*public void SendNextBlock()
     {

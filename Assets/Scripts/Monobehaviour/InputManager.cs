@@ -27,6 +27,7 @@ public sealed class InputManager : MonoBehaviour
     {
         if (_instance != null && _instance != this)
         {
+            Debug.LogError("Not supposed to have more than 1 InputManager on scene");
             Destroy(this.gameObject);
         }
         else

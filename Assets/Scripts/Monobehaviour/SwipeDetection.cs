@@ -11,7 +11,7 @@ public sealed class SwipeDetection : MonoBehaviour
 
     private Vector2 _startPosition;
     private Vector2 _currentPosition;
-    private Vector2 _endPosition;
+    //private Vector2 _endPosition;
     private float _startTime;
     private float _endTime;
 
@@ -31,7 +31,6 @@ public sealed class SwipeDetection : MonoBehaviour
 
     private void SwipeStart(Vector2 position, float time) // Start touching the screen
     {
-        print("Start");
         _startPosition = position;
         _startTime = time;
     }
@@ -40,7 +39,6 @@ public sealed class SwipeDetection : MonoBehaviour
         /*_endPosition = position;
         _endTime = time;
         DetectFinalSwipe();*/
-        print("End");
     }
 
     private void UpdateTouchPosition(Vector2 position, float time)
@@ -55,7 +53,6 @@ public sealed class SwipeDetection : MonoBehaviour
         if (Vector2.Distance(_startPosition, _currentPosition) >= minimumDistance && 
             (_endTime - _startTime) <= maximumTime)
         {
-            Debug.Log("Distance: " + Vector2.Distance(_startPosition, _currentPosition));
             Vector3 direction = _currentPosition - _startPosition;
             Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
             SwipeDirection(direction2D);

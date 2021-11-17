@@ -53,20 +53,4 @@ public sealed class BlockSpawner : MonoBehaviour
             block.IsEnabled = false;
         }
     }
-
-    /*private IEnumerator IncreaseSpeed(float interval, float increment)
-    {
-        while(true)
-        {
-            yield return new WaitForSeconds(interval);
-            CurrentSpeed += increment;
-        }
-    }*/
-
-    /*public void SendNextBlock()
-    {
-        Transform obj = Instantiate(blocks[0], new Vector3(_spawnPos, 0, 0), Quaternion.identity, this.transform);
-        obj.GetComponent<Block>().spawner = this;
-    }*/
-
 }

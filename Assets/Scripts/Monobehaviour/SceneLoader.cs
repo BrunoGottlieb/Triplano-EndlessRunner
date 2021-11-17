@@ -37,7 +37,6 @@ public sealed class SceneLoader : MonoBehaviour
         while (!operation.isDone)
         {
             float progress = Mathf.Clamp01(operation.progress / 0.9f);
-            //_loadingSlider.value = progress;
             yield return null;
         }
     }

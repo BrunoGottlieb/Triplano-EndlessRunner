@@ -1332,3 +1332,227 @@ System memory in use after: 110.6 MB.
 Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 3753.
 Total: 3.383300 ms (FindLiveObjects: 0.324400 ms CreateObjectMapping: 0.145500 ms MarkObjects: 2.899300 ms  DeleteObjects: 0.012900 ms)
 
+========================================================================
+Received Import Request.
+  Time since last request: 911.958794 seconds.
+  path: Assets/Prefabs/tree-christmas.prefab
+  artifactKey: Guid(6a0cd0cb368178543a2bd4cb43127fab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/tree-christmas.prefab using Guid(6a0cd0cb368178543a2bd4cb43127fab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2e2619a10931a6469eb108e23f9f028e') in 0.595843 seconds
+  Import took 0.603581 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.825780 seconds.
+  path: Assets/Prefabs/tree-christmas.prefab
+  artifactKey: Guid(6a0cd0cb368178543a2bd4cb43127fab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/tree-christmas.prefab using Guid(6a0cd0cb368178543a2bd4cb43127fab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4875705bcb23bfacafac4a5a4a41670b') in 0.067005 seconds
+  Import took 0.108214 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.048483 seconds.
+  path: Assets/Prefabs/tree-christmas.prefab
+  artifactKey: Guid(6a0cd0cb368178543a2bd4cb43127fab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/tree-christmas.prefab using Guid(6a0cd0cb368178543a2bd4cb43127fab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7879f4ab22fa0361e8e97d6109f5af9c') in 0.052499 seconds
+  Import took 0.095152 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.609477 seconds.
+  path: Assets/Prefabs/tree-christmas.prefab
+  artifactKey: Guid(6a0cd0cb368178543a2bd4cb43127fab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/tree-christmas.prefab using Guid(6a0cd0cb368178543a2bd4cb43127fab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9ac6f31e047e667e0380a6f68545c609') in 0.058003 seconds
+  Import took 0.063767 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 3.370067 seconds.
+  path: Assets/Prefabs/tree-christmas.prefab
+  artifactKey: Guid(6a0cd0cb368178543a2bd4cb43127fab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/tree-christmas.prefab using Guid(6a0cd0cb368178543a2bd4cb43127fab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4df91818ef66b9994563c0c9ac5252a9') in 0.042485 seconds
+  Import took 0.047826 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 25.986118 seconds.
+  path: Assets/Prefabs/Obstacles/dock-wood.prefab
+  artifactKey: Guid(73a578ed37f07f141bd03ec03d8fbb91) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Obstacles/dock-wood.prefab using Guid(73a578ed37f07f141bd03ec03d8fbb91) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8ccc51577b7160aef2298c7f6d1dab97') in 0.050895 seconds
+  Import took 0.057483 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 950.684851 seconds.
+  path: Assets/Prefabs/Obstacles/tree-christmas.prefab
+  artifactKey: Guid(5ac0c1664dee10344b1d0ec7ff74858b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Obstacles/tree-christmas.prefab using Guid(5ac0c1664dee10344b1d0ec7ff74858b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '69f887803c09baaa16e47653fce5550c') in 0.123387 seconds
+  Import took 0.170190 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 9.504036 seconds.
+  path: Assets/Prefabs/Obstacles/tree-christmas.prefab
+  artifactKey: Guid(5ac0c1664dee10344b1d0ec7ff74858b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Obstacles/tree-christmas.prefab using Guid(5ac0c1664dee10344b1d0ec7ff74858b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5819cce6614a2d85c6c23788b8e4b506') in 0.087417 seconds
+  Import took 0.095472 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.002087 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.96 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.373 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.21 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2883 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 166.2 MB.
+System memory in use after: 166.4 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 3791.
+Total: 5.044400 ms (FindLiveObjects: 0.570000 ms CreateObjectMapping: 0.458300 ms MarkObjects: 3.760700 ms  DeleteObjects: 0.253600 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.001956 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 1.29 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.383 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.36 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2883 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 166.2 MB.
+System memory in use after: 166.4 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 3794.
+Total: 4.079200 ms (FindLiveObjects: 0.436400 ms CreateObjectMapping: 0.166200 ms MarkObjects: 3.444900 ms  DeleteObjects: 0.029100 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000
+========================================================================
+Received Import Request.
+  Time since last request: 1435.499316 seconds.
+  path: Assets/Prefabs/Block Interior/Obstacles and Collectables - Easy 0.prefab
+  artifactKey: Guid(0b09b60ce6a2c5e489533006490d4a98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Block Interior/Obstacles and Collectables - Easy 0.prefab using Guid(0b09b60ce6a2c5e489533006490d4a98) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dd9725501ab467dfc5df13817a59b923') in 0.335867 seconds
+  Import took 0.349233 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000288 seconds.
+  path: Assets/Prefabs/Block Interior/Obstacles and Collectables - Hard 2.prefab
+  artifactKey: Guid(02d73bef472806f4ab00136538d2a2c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Block Interior/Obstacles and Collectables - Hard 2.prefab using Guid(02d73bef472806f4ab00136538d2a2c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '25afc7aa4bb3d9a0d447669deab7c953') in 0.103811 seconds
+  Import took 0.114720 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000255 seconds.
+  path: Assets/Prefabs/Block Interior/Obstacles and Collectables - Medium 1.prefab
+  artifactKey: Guid(e741a3e2ea1697e4d91063d5351673b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Block Interior/Obstacles and Collectables - Medium 1.prefab using Guid(e741a3e2ea1697e4d91063d5351673b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f1dbe84383f2b96d5f57194ffaddb807') in 0.140038 seconds
+  Import took 0.158514 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000206 seconds.
+  path: Assets/Prefabs/Block Interior/Obstacles and Collectables - Medium 0.prefab
+  artifactKey: Guid(c9a93d4efc321924fb13572043528a78) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Block Interior/Obstacles and Collectables - Medium 0.prefab using Guid(c9a93d4efc321924fb13572043528a78) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6329b3b904aacdc5fbff0669e8218751') in 0.107665 seconds
+  Import took 0.120962 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000248 seconds.
+  path: Assets/Prefabs/Block Interior/Obstacles and Collectables - Medium 2.prefab
+  artifactKey: Guid(4a0c7df9f8bfb5449a77b795140b6315) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Block Interior/Obstacles and Collectables - Medium 2.prefab using Guid(4a0c7df9f8bfb5449a77b795140b6315) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '848d60f9e97b36cd9cd1ab9fdffe028b') in 0.137827 seconds
+  Import took 0.159653 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000242 seconds.
+  path: Assets/Prefabs/Block Interior/Obstacles and Collectables - Hard 0.prefab
+  artifactKey: Guid(182b5acace30a0b46b226d732bedc29b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Block Interior/Obstacles and Collectables - Hard 0.prefab using Guid(182b5acace30a0b46b226d732bedc29b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '742eeff1721e734fba10d9a1a40241cd') in 0.093927 seconds
+  Import took 0.104745 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000256 seconds.
+  path: Assets/Prefabs/Block Interior/Obstacles and Collectables - Hard 1.prefab
+  artifactKey: Guid(ab4615252f527394082848b9f5070764) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Block Interior/Obstacles and Collectables - Hard 1.prefab using Guid(ab4615252f527394082848b9f5070764) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '063caae5cd7ac63e11328ecfd9cb78a8') in 0.133581 seconds
+  Import took 0.149160 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000227 seconds.
+  path: Assets/Prefabs/Block Interior/Obstacles and Collectables - Easy 2.prefab
+  artifactKey: Guid(36cf2c4d6499e3444bac0797b8af4837) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Block Interior/Obstacles and Collectables - Easy 2.prefab using Guid(36cf2c4d6499e3444bac0797b8af4837) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '486661e0ef59d81a7c6c096e9668936a') in 0.140059 seconds
+  Import took 0.155711 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000309 seconds.
+  path: Assets/Prefabs/Block Interior/Obstacles and Collectables - Easy 3.prefab
+  artifactKey: Guid(8bac96a3d8fe21d48bd8a027075f3ba7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Block Interior/Obstacles and Collectables - Easy 3.prefab using Guid(8bac96a3d8fe21d48bd8a027075f3ba7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0771328a60f0f8d1abd512b1bc16c5a3') in 0.160105 seconds
+  Import took 0.178016 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000270 seconds.
+  path: Assets/Prefabs/Block Interior/Obstacles and Collectables - Easy 1.prefab
+  artifactKey: Guid(b32fba3f7493e4d4dad916ad2b9da979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Block Interior/Obstacles and Collectables - Easy 1.prefab using Guid(b32fba3f7493e4d4dad916ad2b9da979) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '50c59b40391a41beb71cbd7a37063ad9') in 0.120504 seconds
+  Import took 0.147007 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.252346 seconds.
+  path: Assets/Prefabs/Block Interior/Obstacles and Collectables - Medium 3.prefab
+  artifactKey: Guid(b0f5750900ca0c2488f6ee46b40c2ed5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Block Interior/Obstacles and Collectables - Medium 3.prefab using Guid(b0f5750900ca0c2488f6ee46b40c2ed5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '50ec2acb187dccece093170debca559f') in 0.188776 seconds
+  Import took 0.209446 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.001939 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.97 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.197 seconds
+Platform modules already initialized, skipping
+Switching build target platform(5) subTarget(0) extendedPlatform(0) -> platform(13) subTarget(537395200) extendedPlatform(0)
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 0.99 ms, found 0 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2883 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 167.6 MB.
+System memory in use after: 167.8 MB.
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 3833.
+Total: 3.494400 ms (FindLiveObjects: 0.366800 ms CreateObjectMapping: 0.169100 ms MarkObjects: 2.937400 ms  DeleteObjects: 0.019200 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:graphics/normal-map-encoding: 01000000000000000000000000000000 -> 02000000000000000000000000000000

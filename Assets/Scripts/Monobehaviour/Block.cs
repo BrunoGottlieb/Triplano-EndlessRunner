@@ -5,10 +5,14 @@ using UnityEngine;
 public sealed class Block : MonoBehaviour
 {
     public BlockSpawner spawner;
-    [SerializeField] private GameObject[] contentGroup;
+    [SerializeField] private GameObject debugStage;
+    [SerializeField] private GameObject[] _easyGroup;
+    [SerializeField] private GameObject[] _mediumGroup;
+    [SerializeField] private GameObject[] _hardGroup;
     private float _deathValue = 110.3f;
 
     public bool IsEnabled { get; set; }
+    private GameObject _CurrentStage { get; set; }
 
     private void OnEnable()
     {
@@ -18,14 +22,57 @@ public sealed class Block : MonoBehaviour
 
     private void ChooseContent() // random choose a group of obstacles and collectables
     {
-        if(contentGroup.Length > 0)
+        int distance = StatsSystem.Instance != null? StatsSystem.Instance.Distance : 0; // current distance travelled by player
+        _CurrentStage?.SetActive(false); // disable (now)previous stage
+
+        if (distance < spawner.EasyMediumDistance) // will spawn an easy stage
         {
-            foreach (GameObject content in contentGroup)
-            {
-                content.gameObject.SetActive(false);
-            }
-            contentGroup[Random.Range(0, contentGroup.Length)].SetActive(true);
+            _CurrentStage = GetRandomStage(_easyGroup);
         }
+        else if (distance >= spawner.EasyMediumDistance && distance < spawner.MediumDistance) // will easy stages and medium stages
+        {
+            _CurrentStage = GetRandomStage(_easyGroup, _mediumGroup);
+        }
+        else if(distance >= spawner.MediumDistance && distance < spawner.MediumHardDistance) // will spawn a medium stage
+        {
+            _CurrentStage = GetRandomStage(_mediumGroup);
+        }
+        else if (distance >= spawner.MediumDistance && distance < spawner.HardDistance) // will spawn medium stages and hard stages
+        {
+            _CurrentStage = GetRandomStage(_mediumGroup, _hardGroup);
+        }
+        else if(distance >= spawner.HardDistance) // will spawn only hard stages
+        {
+            _CurrentStage = GetRandomStage(_hardGroup);
+        }
+        else
+        {
+            Debug.LogError("Something went wrong on block difficult chooser");
+        }
+
+        if(debugStage != null) // only for tests porpouse
+        {
+            _CurrentStage = debugStage;
+        }
+
+        _CurrentStage.SetActive(true);
+    }
+
+    private GameObject GetRandomStage(GameObject[] groupA, GameObject[] groupB = null)
+    {
+        int sizeA = groupA.Length;
+        int sizeB = groupB != null ? groupB.Length : 0;
+        int rand = Random.Range(0, sizeA + sizeB);
+        
+        if(groupA.Length > rand)
+        {
+            return groupA[rand];
+        }
+        else
+        {
+            return groupB[rand - sizeA];
+        }
+
     }
 
     private void FixedUpdate()
@@ -36,7 +83,6 @@ public sealed class Block : MonoBehaviour
 
             if (this.transform.localPosition.x >= _deathValue)
             {
-                //spawner.SendNextBlock();
                 this.transform.localPosition = new Vector3(spawner.SpawnPos, 0, 0);
                 ChooseContent();
             }

@@ -7,17 +7,20 @@ public sealed class BlockSpawner : MonoBehaviour
     public Block[] blocks;
     public float initialSpeed = 10;
     private float _spawnPos = -124;
+    [SerializeField] private int _easyMediumDistance;
+    [SerializeField] private int _mediumDistance;
+    [SerializeField] private int _mediumHardDistance;
+    [SerializeField] private int _hardDistance;
+
     public float CurrentSpeed { get; set; }
     public float SpawnPos { get { return _spawnPos; } }
+    public int EasyMediumDistance { get { return _easyMediumDistance; } }
+    public int MediumDistance { get { return _mediumDistance; } }
+    public int MediumHardDistance { get { return _mediumHardDistance; } }
+    public int HardDistance { get { return _hardDistance; } }
 
     private static BlockSpawner _instance;
     public static BlockSpawner Instance { get { return _instance; } }
-
-    public void Init(float speed)
-    {
-        CurrentSpeed = speed;
-        Awake();
-    }
 
     private void Awake()
     {

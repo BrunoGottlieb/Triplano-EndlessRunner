@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public sealed class BlockSpawner : MonoBehaviour
 {
@@ -11,6 +10,8 @@ public sealed class BlockSpawner : MonoBehaviour
     [SerializeField] private int _mediumDistance;
     [SerializeField] private int _mediumHardDistance;
     [SerializeField] private int _hardDistance;
+    [SerializeField] private Button touchToStartBtn;
+    [SerializeField] private PlayerAnimationManager playerAnimation;
 
     public float CurrentSpeed { get; set; }
     public float SpawnPos { get { return _spawnPos; } }
@@ -33,7 +34,16 @@ public sealed class BlockSpawner : MonoBehaviour
         {
             _instance = this;
         }
-        CurrentSpeed = initialSpeed;
+
+        touchToStartBtn.onClick.AddListener(TouchToStart);
+    }
+
+    public void TouchToStart()
+    {
+        CurrentSpeed = initialSpeed; // move the scenary
+        touchToStartBtn.gameObject.SetActive(false); // hide the 'touch to start' screen
+        playerAnimation.StartRunning(); // start player run animation
+        StatsSystem.Instance.StartMeasuringDistance(); // start measuring the distance
     }
 
     public void StopAllBlocks()

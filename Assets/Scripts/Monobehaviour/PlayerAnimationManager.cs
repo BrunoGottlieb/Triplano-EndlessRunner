@@ -11,6 +11,7 @@ public sealed class PlayerAnimationManager : MonoBehaviour
     public bool IsJumping { get { return _anim.GetBool("IsJumping"); } }
     public bool IsSliding { get { return _anim.GetBool("IsSliding"); } }
     public bool IsDead { get { return _anim.GetBool("IsDead"); } }
+    public bool IsRunning { get { return _anim.GetBool("IsRunning"); } }
 
     private void Awake()
     {
@@ -55,12 +56,18 @@ public sealed class PlayerAnimationManager : MonoBehaviour
         _anim.SetBool("IsJumping", false);
     }
 
+    public void StartRunning() // Called on first touch
+    {
+        _anim.SetBool("IsRunning", true);
+    }
+
     public void Die()
     {
         if(!IsDead)
         {
             deathEffect.SetActive(true);
             _anim.SetBool("IsDead", true);
+            _anim.SetBool("IsRunning", false);
         }
     }
 

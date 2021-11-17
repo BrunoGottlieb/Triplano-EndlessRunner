@@ -62,19 +62,6 @@ public sealed class SwipeDetection : MonoBehaviour
             _startTime = -Mathf.Infinity;
         }
     }
-
-    private void DetectFinalSwipe() // Check if it's indeed a swype
-    {
-        if (Vector3.Distance(_startPosition, _endPosition) >= minimumDistance &&
-            (_endTime - _startTime) <= maximumTime)
-        {
-            Debug.DrawLine(_startPosition, _endPosition, Color.red, 5);
-            Vector3 direction = _endPosition - _startPosition;
-            Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
-            SwipeDirection(direction2D);
-        }
-    }
-
     private void SwipeDirection(Vector2 direction)
     {
         if(Vector2.Dot(Vector2.up, direction) > directionThreshold)

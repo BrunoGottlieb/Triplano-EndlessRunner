@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SaveSystem : MonoBehaviour
 {
-    public static readonly string SAVE_FOLDER = Application.dataPath + "/Saves/";
+    public static readonly string SAVE_FOLDER = Application.persistentDataPath + "/Saves/";
 
     public static void Init()
     {

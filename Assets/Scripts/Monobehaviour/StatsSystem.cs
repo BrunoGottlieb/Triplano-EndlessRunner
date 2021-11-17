@@ -44,8 +44,12 @@ public sealed class StatsSystem : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(IncreaseDistance());
         energyText.text = maxEnergy.ToString() + "/" + maxEnergy.ToString();
+    }
+
+    public void StartMeasuringDistance()
+    {
+        StartCoroutine(IncreaseDistance());
     }
 
     private IEnumerator IncreaseDistance()

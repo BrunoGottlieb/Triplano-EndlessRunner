@@ -22,10 +22,10 @@ public sealed class StatsSystem : MonoBehaviour
     [SerializeField] private Transform gemPos;
     [SerializeField] private Transform energyPos;
 
-    private int _Gold { get; set; }
-    private int _Gem { get; set; }
-    private int _Energy { get; set; }
-    private int _Distance { get; set; }
+    public int Gold { get; set; }
+    public int Gem { get; set; }
+    public int Energy { get; set; }
+    public int Distance { get; set; }
     public Vector2 GoldPosition { get { return goldPos.localPosition; } }
     public Vector2 GemPosition { get { return gemPos.localPosition; } }
     public Vector2 EnergyPosition { get { return energyPos.localPosition; } }
@@ -53,8 +53,8 @@ public sealed class StatsSystem : MonoBehaviour
         while(!player.IsDead)
         {
             yield return new WaitForSeconds(0.3f);
-            _Distance++;
-            distanceText.text = _Distance.ToString("00000" + "m");
+            Distance++;
+            distanceText.text = Distance.ToString("00000" + "m");
         }
     }
 
@@ -66,30 +66,30 @@ public sealed class StatsSystem : MonoBehaviour
 
     public void UpdateGold(int value)
     {
-        _Gold += value;
-        goldText.text = _Gold.ToString();
+        Gold += value;
+        goldText.text = Gold.ToString();
         ApplyTextScaleEffect(goldText.transform);
     }
 
     public void UpdateGem(int value)
     {
-        _Gem += value;
-        gemText.text = _Gem.ToString();
+        Gem += value;
+        gemText.text = Gem.ToString();
         ApplyTextScaleEffect(gemText.transform);
     }
 
     public void UpdateEnergy(int value)
     {
-        _Energy += value;
-        energyText.text = _Energy.ToString();
+        Energy += value;
+        energyText.text = Energy.ToString();
         ApplyTextScaleEffect(energyText.transform);
     }
 
     public int ApplyDamage(int value)
     {
-        int newEnergy = Mathf.Clamp((_Energy - value), 0, 100);
+        int newEnergy = Mathf.Clamp((Energy - value), 0, 100);
         energyText.text = newEnergy.ToString() + "/" + maxEnergy.ToString();
-        return _Energy = newEnergy;
+        return Energy = newEnergy;
     }
 
 }

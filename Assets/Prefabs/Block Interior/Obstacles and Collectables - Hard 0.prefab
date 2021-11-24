@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 2307701735300214505}
   - component: {fileID: 7345390898063557538}
   m_Layer: 0
-  m_Name: Obstacles and Collectables - Hard
+  m_Name: Obstacles and Collectables - Hard 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d215d98705972254e85bebc9021ff1e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectableGroup: {fileID: 1382621767251443308}
+  _collectableGroup: {fileID: 1382621767251443308}
 --- !u!1001 &231769853458495529
 PrefabInstance:
   m_ObjectHideFlags: 0

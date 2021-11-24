@@ -1,33 +1,27 @@
-using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CollectableOnUI : MonoBehaviour
+public sealed class CollectableOnUI : MonoBehaviour
 {
     private CollectableIndicator _indicator;
     private Vector2 _targetPos;
     private Image _image;
 
-    public bool isMoving;
-    public float distance;
-
-    public bool IsMoving { get; set; }
+    public bool IsMoving { get; private set; }
 
     private void Awake()
     {
-        _image = this.GetComponent<Image>();
+        Init();
     }
 
-    public void PlayEffect(CollectableIndicator indicator)
+    public void Init()
     {
-        _indicator = indicator;
-        _image.sprite = indicator.icon;
-        _targetPos = GetTargetPosition();
-        this.gameObject.SetActive(true);
-        transform.localPosition = Vector3.zero;
-        transform.LeanMoveLocal(_targetPos, 0.2f);
-        IsMoving = true;
+        GetReferences();
+    }
+
+    private void GetReferences()
+    {
+        _image = this.GetComponent<Image>();
     }
 
     private Vector2 GetTargetPosition()
@@ -69,13 +63,42 @@ public class CollectableOnUI : MonoBehaviour
 
     private void Update()
     {
-        if (Vector2.Distance(this.transform.localPosition, _targetPos) < 10)
+        Move();
+    }
+
+    private void Move()
+    {
+        if (ReachedTargetPosition())
         {
             UpdateStats();
             IsMoving = false;
             this.gameObject.SetActive(false);
         }
-        distance = Vector2.Distance(this.transform.localPosition, _targetPos);
-        isMoving = IsMoving;
+    }
+
+    private bool ReachedTargetPosition()
+    {
+        return Vector2.Distance(this.transform.localPosition, _targetPos) < 10;
+    }
+
+    private void SetIndicatorIcon(CollectableIndicator indicator)
+    {
+        _indicator = indicator;
+        _image.sprite = indicator.icon;
+    }
+
+    private void SetIconPosition()
+    {
+        _targetPos = GetTargetPosition();
+        transform.localPosition = Vector3.zero;
+        transform.LeanMoveLocal(_targetPos, 0.2f);
+    }
+
+    public void PlayVisualEffect(CollectableIndicator indicator)
+    {
+        SetIndicatorIcon(indicator);
+        this.gameObject.SetActive(true);
+        SetIconPosition();
+        IsMoving = true;
     }
 }

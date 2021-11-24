@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +7,11 @@ public sealed class SceneLoader : MonoBehaviour
     [SerializeField] private GameObject _loadingScreen;
 
     private void Start()
+    {
+        EnableLoadingScreen();
+    }
+
+    private void EnableLoadingScreen()
     {
         _loadingScreen.SetActive(false);
     }

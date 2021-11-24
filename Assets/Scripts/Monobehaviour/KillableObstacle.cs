@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageableObstacle : MonoBehaviour, IObstacle
+public sealed class DamageableObstacle : MonoBehaviour, IObstacle
 {
-    public int TakeDamage()
+    private readonly int _damage = 1;
+    public int GetDamageAmount()
     {
-        return 1;
+        return _damage;
     }
 
 }

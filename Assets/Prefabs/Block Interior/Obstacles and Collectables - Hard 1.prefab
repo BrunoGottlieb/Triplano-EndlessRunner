@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d215d98705972254e85bebc9021ff1e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectableGroup: {fileID: 486549239758337003}
+  _collectableGroup: {fileID: 486549239758337003}
 --- !u!1001 &167781586206727641
 PrefabInstance:
   m_ObjectHideFlags: 0

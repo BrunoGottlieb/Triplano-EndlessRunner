@@ -1,54 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public sealed class PlayerAnimationManager : MonoBehaviour
 {
-    [SerializeField] private GameObject deathEffect;
+    [SerializeField] private GameObject _deathEffect;
     private Animator _anim;
-
     public bool PlayerCanInteract { get { return _anim.GetBool("CanInteract") && !_anim.GetBool("IsDead"); } }
     public bool IsJumping { get { return _anim.GetBool("IsJumping"); } }
     public bool IsSliding { get { return _anim.GetBool("IsSliding"); } }
     public bool IsDead { get { return _anim.GetBool("IsDead"); } }
     public bool IsRunning { get { return _anim.GetBool("IsRunning"); } }
+    public bool IsStanding { get { return !IsJumping && !IsSliding && PlayerCanInteract; } }
 
     private void Awake()
+    {
+        Init();
+    }
+
+    public void Init()
+    {
+        GetReferences();
+    }
+
+    private void GetReferences()
     {
         _anim = this.GetComponentInChildren<Animator>();
     }
 
-    private void OnEnable()
+    public void PlayJumpAnimation()
     {
-        InputManager.Instance.OnJump += SetJump;
-        InputManager.Instance.OnSlide += SetSlide;
+        _anim.SetBool("IsJumping", true);
     }
 
-    private void OnDisable()
+    public void PlaySlideAnimation()
     {
-        InputManager.Instance.OnJump -= SetJump;
-        InputManager.Instance.OnSlide -= SetSlide;
-    }
-
-    private void SetJump()
-    {
-        if(PlayerCanInteract)
-        {
-            _anim.SetBool("IsJumping", true);
-        }
-    }
-
-    private void SetSlide()
-    {
-        if (PlayerCanInteract)
-        {
-            _anim.SetBool("IsSliding", true);
-        }
-    }
-
-    public void Damage()
-    {
-        _anim.SetTrigger("Damage");
+        _anim.SetBool("IsSliding", true);
     }
 
     public void SetNotJumping() // Called on the heighest position of jump
@@ -61,14 +46,17 @@ public sealed class PlayerAnimationManager : MonoBehaviour
         _anim.SetBool("IsRunning", true);
     }
 
-    public void Die()
+    public void PlayDamageAnimation()
     {
-        if(!IsDead)
-        {
-            deathEffect.SetActive(true);
-            _anim.SetBool("IsDead", true);
-            _anim.SetBool("IsRunning", false);
-        }
+        _anim.SetTrigger("Damage");
+    }
+
+    public void PlayDeathAnimation()
+    {
+        _deathEffect.SetActive(true);
+        _anim.SetBool("IsDead", true);
+        _anim.SetBool("IsRunning", false);
+        _deathEffect.SetActive(true);
     }
 
 }

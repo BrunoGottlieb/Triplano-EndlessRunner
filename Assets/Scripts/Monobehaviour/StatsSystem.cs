@@ -4,37 +4,42 @@ using UnityEngine;
 
 public sealed class StatsSystem : MonoBehaviour
 {
-    private static StatsSystem _instance;
     public static StatsSystem Instance { get { return _instance; } }
-    [SerializeField] private PlayerAnimationManager player;
+    private static StatsSystem _instance;
+    private Coroutine _measureDistanceCoroutine;
 
     [Header("Control")]
-    [SerializeField] private int maxEnergy;
+    [SerializeField] private int _maxEnergy;
 
     [Header("Texts")]
-    [SerializeField] private TextMeshProUGUI goldText;
-    [SerializeField] private TextMeshProUGUI gemText;
-    [SerializeField] private TextMeshProUGUI energyText;
-    [SerializeField] private TextMeshProUGUI distanceText;
+    [SerializeField] private TextMeshProUGUI _goldText;
+    [SerializeField] private TextMeshProUGUI _gemText;
+    [SerializeField] private TextMeshProUGUI _energyText;
+    [SerializeField] private TextMeshProUGUI _distanceText;
 
     [Header("Targets")]
-    [SerializeField] private Transform goldPos;
-    [SerializeField] private Transform gemPos;
-    [SerializeField] private Transform energyPos;
+    [SerializeField] private Transform _goldPos;
+    [SerializeField] private Transform _gemPos;
+    [SerializeField] private Transform _energyPos;
 
-    public int Gold { get; set; }
-    public int Gem { get; set; }
-    public int Energy { get; set; }
-    public int Distance { get; set; }
-    public Vector2 GoldPosition { get { return goldPos.localPosition; } }
-    public Vector2 GemPosition { get { return gemPos.localPosition; } }
-    public Vector2 EnergyPosition { get { return energyPos.localPosition; } }
+    public int Gold { get; private set; }
+    public int Gem { get; private set; }
+    public int Energy { get; private set; }
+    public int Distance { get; private set; }
+    public Vector2 GoldPosition { get { return _goldPos.localPosition; } }
+    public Vector2 GemPosition { get { return _gemPos.localPosition; } }
+    public Vector2 EnergyPosition { get { return _energyPos.localPosition; } }
 
     private void Awake()
     {
+        Init();
+    }
+
+    public void Init()
+    {
         if (_instance != null && _instance != this)
         {
-            Destroy(this.gameObject);
+            Debug.Log("Not supposed to have more than 1 StatsSystem on scene");
         }
         else
         {
@@ -44,21 +49,21 @@ public sealed class StatsSystem : MonoBehaviour
 
     private void Start()
     {
-        energyText.text = maxEnergy.ToString() + "/" + maxEnergy.ToString();
+        InitializeEnergyText();
     }
 
-    public void StartMeasuringDistance()
+    private void InitializeEnergyText()
     {
-        StartCoroutine(IncreaseDistance());
+        _energyText.text = _maxEnergy.ToString() + "/" + _maxEnergy.ToString();
     }
 
     private IEnumerator IncreaseDistance()
     {
-        while(!player.IsDead)
+        while(true)
         {
             yield return new WaitForSeconds(0.3f);
             Distance++;
-            distanceText.text = Distance.ToString("00000" + "m");
+            _distanceText.text = Distance.ToString("00000" + "m");
         }
     }
 
@@ -68,32 +73,41 @@ public sealed class StatsSystem : MonoBehaviour
         obj.transform.LeanScale(new Vector3(1, 1, 1), 0.2f).setDelay(0.25f);
     }
 
+    public void StartMeasuringDistance() // Called by player's touch on screen
+    {
+        _measureDistanceCoroutine = StartCoroutine(IncreaseDistance());
+    }
+
+    public void StopMeasuringDistance() // Called by PlayerController when it's dead
+    {
+        StopCoroutine(_measureDistanceCoroutine);
+    }
+
     public void UpdateGold(int value)
     {
         Gold += value;
-        goldText.text = Gold.ToString();
-        ApplyTextScaleEffect(goldText.transform);
+        _goldText.text = Gold.ToString();
+        ApplyTextScaleEffect(_goldText.transform);
     }
 
     public void UpdateGem(int value)
     {
         Gem += value;
-        gemText.text = Gem.ToString();
-        ApplyTextScaleEffect(gemText.transform);
+        _gemText.text = Gem.ToString();
+        ApplyTextScaleEffect(_gemText.transform);
     }
 
     public void UpdateEnergy(int value)
     {
         Energy += value;
-        energyText.text = Energy.ToString();
-        ApplyTextScaleEffect(energyText.transform);
+        _energyText.text = Energy.ToString();
+        ApplyTextScaleEffect(_energyText.transform);
     }
 
-    public int ApplyDamage(int value)
+    public void ApplyDamage(int value)
     {
-        int newEnergy = Mathf.Clamp((Energy - value), 0, 100);
-        energyText.text = newEnergy.ToString() + "/" + maxEnergy.ToString();
-        return Energy = newEnergy;
+        int newEnergy = Mathf.Clamp((Energy - value), 0, _maxEnergy);
+        _energyText.text = newEnergy.ToString() + "/" + _maxEnergy.ToString();
+        Energy = newEnergy;
     }
-
 }

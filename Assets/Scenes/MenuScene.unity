@@ -1102,7 +1102,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 579028852}
-  m_LocalRotation: {x: 0.01278428, y: -0.48392704, z: 0.0070705763, w: 0.8749864}
+  m_LocalRotation: {x: 0.01278429, y: -0.48392704, z: 0.007070582, w: 0.8749864}
   m_LocalPosition: {x: -71.63601, y: 3.6848001, z: 53.572998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1654,7 +1654,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cam1: {fileID: 1948092913}
   _screen: {fileID: 596984136}
-  sceneLoader: {fileID: 1977187895294619304}
+  _sceneLoader: {fileID: 1977187895294619304}
   _playButton: {fileID: 886975333}
   _exitButton: {fileID: 537832709}
 --- !u!4 &835292192

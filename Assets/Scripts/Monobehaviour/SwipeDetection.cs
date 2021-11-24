@@ -1,32 +1,38 @@
-using System;
-using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public sealed class SwipeDetection : MonoBehaviour
 {
-    [SerializeField] float minimumDistance = 0.2f;
-    [SerializeField] float maximumTime = 1f;
-    [SerializeField, Range(0,1)] float directionThreshold = 0.9f;
+    [SerializeField] float _minimumDistance = 0.2f;
+    [SerializeField] float _maximumTime = 1f;
+    [SerializeField, Range(0,1)] float _directionThreshold = 0.9f;
 
     private Vector2 _startPosition;
     private Vector2 _currentPosition;
-    //private Vector2 _endPosition;
     private float _startTime;
     private float _endTime;
 
     private void OnEnable()
     {
-        InputManager.Instance.OnStartTouch += SwipeStart;
-        InputManager.Instance.OnEndTouch += SwipeEnd;
-        InputManager.Instance.OnCurrentTouch += UpdateTouchPosition;
+        SubscribeToInputs();
     }
 
     private void OnDisable()
     {
-        InputManager.Instance.OnStartTouch -= SwipeStart;
-        InputManager.Instance.OnEndTouch -= SwipeEnd;
-        InputManager.Instance.OnCurrentTouch -= UpdateTouchPosition;
+        UnsubscribeToInputs();
+    }
+
+    private void SubscribeToInputs()
+    {
+        InputSystem.Instance.OnStartTouch += SwipeStart;
+        InputSystem.Instance.OnEndTouch += SwipeEnd;
+        InputSystem.Instance.OnCurrentTouch += UpdateTouchPosition;
+    }
+
+    private void UnsubscribeToInputs()
+    {
+        InputSystem.Instance.OnStartTouch -= SwipeStart;
+        InputSystem.Instance.OnEndTouch -= SwipeEnd;
+        InputSystem.Instance.OnCurrentTouch -= UpdateTouchPosition;
     }
 
     private void SwipeStart(Vector2 position, float time) // Start touching the screen
@@ -36,22 +42,19 @@ public sealed class SwipeDetection : MonoBehaviour
     }
     private void SwipeEnd(Vector2 position, float time) // Not touching it anymore
     {
-        /*_endPosition = position;
-        _endTime = time;
-        DetectFinalSwipe();*/
+        /// Not using it anymore
     }
 
-    private void UpdateTouchPosition(Vector2 position, float time)
+    private void UpdateTouchPosition(Vector2 position, float time) // Called whiel touching the screen
     {
         _currentPosition = position;
         _endTime = time;
         DetectSwipe();
     }
 
-    private void DetectSwipe() // Check if it's indeed a swype
+    private void DetectSwipe()
     {
-        if (Vector2.Distance(_startPosition, _currentPosition) >= minimumDistance && 
-            (_endTime - _startTime) <= maximumTime)
+        if (IsIndeedSwipe())
         {
             Vector3 direction = _currentPosition - _startPosition;
             Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
@@ -59,23 +62,30 @@ public sealed class SwipeDetection : MonoBehaviour
             _startTime = -Mathf.Infinity;
         }
     }
+
+    private bool IsIndeedSwipe() // Check if it's indeed a swype
+    {
+        return Vector2.Distance(_startPosition, _currentPosition) >= _minimumDistance &&
+            (_endTime - _startTime) <= _maximumTime;
+    }
+
     private void SwipeDirection(Vector2 direction)
     {
-        if(Vector2.Dot(Vector2.up, direction) > directionThreshold)
+        if(Vector2.Dot(Vector2.up, direction) > _directionThreshold)
         {
-            InputManager.Instance.Jump();
+            InputSystem.Instance.Jump();
         }
-        else if (Vector2.Dot(Vector2.left, direction) > directionThreshold)
+        else if (Vector2.Dot(Vector2.left, direction) > _directionThreshold)
         {
-            InputManager.Instance.MoveLeft();
+            InputSystem.Instance.MoveLeft();
         }
-        else if (Vector2.Dot(Vector2.right, direction) > directionThreshold)
+        else if (Vector2.Dot(Vector2.right, direction) > _directionThreshold)
         {
-            InputManager.Instance.MoveRight();
+            InputSystem.Instance.MoveRight();
         }
-        else if (Vector2.Dot(Vector2.down, direction) > directionThreshold)
+        else if (Vector2.Dot(Vector2.down, direction) > _directionThreshold)
         {
-            InputManager.Instance.Slide();
+            InputSystem.Instance.Slide();
         }
         else
         {

@@ -4,17 +4,27 @@ using UnityEngine;
 
 public sealed class CameraShaker : MonoBehaviour
 {
-    private static CameraShaker _instance;
     public static CameraShaker Instance { get { return _instance; } }
-
-    private CinemachineVirtualCamera vcam;
-    private CinemachineBasicMultiChannelPerlin noise;
+    private static CameraShaker _instance;
+    private CinemachineVirtualCamera _vcam;
+    private CinemachineBasicMultiChannelPerlin _noise;
 
     private void Awake()
     {
+        Init();
+    }
+
+    public void Init()
+    {
+        InitInstance();
+        GetReferences();
+    }
+
+    private void InitInstance()
+    {
         if (_instance != null && _instance != this)
         {
-            Destroy(this.gameObject);
+            Debug.LogError("Not supposed to have more than one instance of CameraShaker on scene");
         }
         else
         {
@@ -24,8 +34,13 @@ public sealed class CameraShaker : MonoBehaviour
 
     private void Start()
     {
-        vcam = this.GetComponent<CinemachineVirtualCamera>();
-        noise = vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        GetReferences();
+    }
+
+    private void GetReferences()
+    {
+        _vcam = this.GetComponent<CinemachineVirtualCamera>();
+        _noise = _vcam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
     }
 
     public void Shake(float amplitudeGain, float frequencyGain, float duration)
@@ -35,11 +50,11 @@ public sealed class CameraShaker : MonoBehaviour
 
     private IEnumerator Noise(float amplitudeGain, float frequencyGain, float duration)
     {
-        noise.m_AmplitudeGain = amplitudeGain;
-        noise.m_FrequencyGain = frequencyGain;
+        _noise.m_AmplitudeGain = amplitudeGain;
+        _noise.m_FrequencyGain = frequencyGain;
         yield return new WaitForSeconds(duration);
-        noise.m_AmplitudeGain = 0;
-        noise.m_FrequencyGain = 0;
+        _noise.m_AmplitudeGain = 0;
+        _noise.m_FrequencyGain = 0;
     }
 
 }

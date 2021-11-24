@@ -1,47 +1,78 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public sealed class Block : MonoBehaviour
 {
-    public BlockSpawner spawner;
-    [SerializeField] private GameObject debugStage;
+    [SerializeField] private BlockSpawner _spawner;
+    [SerializeField] private GameObject _debugStage;
     [SerializeField] private GameObject[] _easyGroup;
     [SerializeField] private GameObject[] _mediumGroup;
     [SerializeField] private GameObject[] _hardGroup;
-    private float _deathValue = 110.3f;
+    private readonly float _deathValue = 110.3f;
 
     public bool IsEnabled { get; set; }
     private GameObject _CurrentStage { get; set; }
 
     private void OnEnable()
     {
+        Init();
+    }
+
+    public void Init()
+    {
         IsEnabled = true;
         ChooseContent();
     }
 
+    private void FixedUpdate()
+    {
+        MoveTheBlock();
+    }
+
+    private void MoveTheBlock() // if player is alive, keep moving the block
+    {
+        if (!IsEnabled) { return; }
+
+        this.transform.Translate(_spawner.CurrentSpeed * Time.deltaTime * Vector3.right, Space.Self);
+
+        if (IsRespawnPosition())
+        {
+            ResetPosition();
+            ChooseContent();
+        }
+    }
+
+    private bool IsRespawnPosition()
+    {
+        return this.transform.localPosition.x >= _deathValue;
+    }
+
+    private void ResetPosition()
+    {
+        this.transform.localPosition = new Vector3(_spawner.SpawnPos, 0, 0);
+    }
+
     private void ChooseContent() // random choose a group of obstacles and collectables
     {
-        int distance = StatsSystem.Instance != null? StatsSystem.Instance.Distance : 0; // current distance travelled by player
+        int distance = StatsSystem.Instance != null ? StatsSystem.Instance.Distance : 0; // current distance travelled by player
         _CurrentStage?.SetActive(false); // disable (now)previous stage
 
-        if (distance < spawner.EasyMediumDistance) // will spawn an easy stage
+        if (IsEasyDistance(distance)) // will spawn an easy stage
         {
             _CurrentStage = GetRandomStage(_easyGroup);
         }
-        else if (distance >= spawner.EasyMediumDistance && distance < spawner.MediumDistance) // will easy stages and medium stages
+        else if (IsEasyMediumDistance(distance)) // will easy stages and medium stages
         {
             _CurrentStage = GetRandomStage(_easyGroup, _mediumGroup);
         }
-        else if(distance >= spawner.MediumDistance && distance < spawner.MediumHardDistance) // will spawn a medium stage
+        else if (IsMediumDistance(distance)) // will spawn a medium stage
         {
             _CurrentStage = GetRandomStage(_mediumGroup);
         }
-        else if (distance >= spawner.MediumDistance && distance < spawner.HardDistance) // will spawn medium stages and hard stages
+        else if (IsMediumHardDistance(distance)) // will spawn medium stages and hard stages
         {
             _CurrentStage = GetRandomStage(_mediumGroup, _hardGroup);
         }
-        else if(distance >= spawner.HardDistance) // will spawn only hard stages
+        else if (IsHardDistance(distance)) // will spawn only hard stages
         {
             _CurrentStage = GetRandomStage(_hardGroup);
         }
@@ -50,9 +81,9 @@ public sealed class Block : MonoBehaviour
             Debug.LogError("Something went wrong on block difficult chooser");
         }
 
-        if(debugStage != null) // only for tests porpouse
+        if (_debugStage != null) // only for tests porpouse
         {
-            _CurrentStage = debugStage;
+            _CurrentStage = _debugStage;
         }
 
         _CurrentStage.SetActive(true);
@@ -63,8 +94,8 @@ public sealed class Block : MonoBehaviour
         int sizeA = groupA.Length;
         int sizeB = groupB != null ? groupB.Length : 0;
         int rand = Random.Range(0, sizeA + sizeB);
-        
-        if(groupA.Length > rand)
+
+        if (groupA.Length > rand)
         {
             return groupA[rand];
         }
@@ -72,20 +103,31 @@ public sealed class Block : MonoBehaviour
         {
             return groupB[rand - sizeA];
         }
-
     }
 
-    private void FixedUpdate()
+    private bool IsEasyDistance(float distance)
     {
-        if(IsEnabled) // if player is alive, keep moving the block
-        {
-            this.transform.Translate(Vector3.right * spawner.CurrentSpeed * Time.deltaTime, Space.Self);
-
-            if (this.transform.localPosition.x >= _deathValue)
-            {
-                this.transform.localPosition = new Vector3(spawner.SpawnPos, 0, 0);
-                ChooseContent();
-            }
-        }
+        return distance < _spawner.EasyMediumDistance;
     }
+
+    private bool IsEasyMediumDistance(int distance)
+    {
+        return distance >= _spawner.EasyMediumDistance && distance < _spawner.MediumDistance;
+    }
+
+    private bool IsMediumDistance(int distance)
+    {
+        return distance >= _spawner.MediumDistance && distance < _spawner.MediumHardDistance;
+    }
+
+    private bool IsMediumHardDistance(int distance)
+    {
+        return distance >= _spawner.MediumDistance && distance < _spawner.HardDistance;
+    }
+
+    private bool IsHardDistance(int distance)
+    {
+        return distance >= _spawner.HardDistance;
+    }
+
 }

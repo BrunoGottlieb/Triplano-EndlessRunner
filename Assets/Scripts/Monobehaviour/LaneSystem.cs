@@ -1,48 +1,34 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public sealed class LaneSystem : MonoBehaviour
 {
-    public PlayerController player;
-    public Transform[] lanes;
+    [SerializeField] private Transform[] _lanes;
+    private int _currentIndex = 1;
+    private int _CurrentLaneIndex { get { return _currentIndex; } set { _currentIndex = value; } } // Range 0 - 2
+    private int _LaneCount { get { return _lanes.Length; } } // Range 0 - 2
+    private Transform _CurrentLane { get { return _lanes[_CurrentLaneIndex]; } } // Current lane transform
 
-    private int _CurrentLaneIndex { get; set; } // Range 0 - 2
-    private Transform _CurrentLane { get { return lanes[_CurrentLaneIndex]; } } // Current lane transform
-
-    private void Awake()
+    public void IncreaseCurrentLane() // Called on player movement
     {
-        _CurrentLaneIndex = 1; // Begins on the middle lane
+        _CurrentLaneIndex--;
     }
 
-    private void OnEnable()
+    public void DecreaseCurrentLane() // Called on player movement
     {
-        InputManager.Instance.OnMoveRight += DecreaseCurrentLane;
-        InputManager.Instance.OnMoveLeft += IncreaseCurrentLane;
+        _CurrentLaneIndex++;
     }
 
-    private void OnDisable()
+    public bool CanIncreaseLane()
     {
-        InputManager.Instance.OnMoveRight -= DecreaseCurrentLane;
-        InputManager.Instance.OnMoveLeft -= IncreaseCurrentLane;
+        return (_CurrentLaneIndex + 1) < _LaneCount;
     }
 
-    private void IncreaseCurrentLane() // Called on right input
+    public bool CanDecreaseLane()
     {
-        if(_CurrentLaneIndex > 0 && player.CanChangeLane)
-        {
-            _CurrentLaneIndex--;
-        }
+        return (_CurrentLaneIndex - 1) >= 0;
     }
 
-    private void DecreaseCurrentLane() // Called on left input
-    {
-        if (_CurrentLaneIndex < 2 && player.CanChangeLane)
-        {
-            _CurrentLaneIndex++;
-        }
-    }
-
-    public Vector3 GetLane() // Called by player on Update Method
+    public Vector3 GetCurrentLane() // Called by player on Update Method
     {
         return _CurrentLane.position;
     }

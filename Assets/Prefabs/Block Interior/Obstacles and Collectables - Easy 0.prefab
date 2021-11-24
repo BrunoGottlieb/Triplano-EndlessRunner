@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 1701642966796983286}
   - component: {fileID: 1098743541187029318}
   m_Layer: 0
-  m_Name: Obstacles and Collectables - Easy
+  m_Name: Obstacles and Collectables - Easy 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d215d98705972254e85bebc9021ff1e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectableGroup: {fileID: 7344907427991405878}
+  _collectableGroup: {fileID: 7344907427991405878}
 --- !u!1 &2705458917309200404
 GameObject:
   m_ObjectHideFlags: 0

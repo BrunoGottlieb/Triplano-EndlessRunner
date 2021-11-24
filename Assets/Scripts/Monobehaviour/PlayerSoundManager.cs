@@ -1,26 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public sealed class PlayerSoundManager : MonoBehaviour
 {
     [Header("Sounds")]
-    public AudioSource _slideSource;
-    public AudioSource _airSource;
-    public AudioSource _jumpSource;
+    [SerializeField] private AudioSource _slideSource;
+    [SerializeField] private AudioSource _airSource;
+    [SerializeField] private AudioSource _jumpSource;
 
-    private InputManager _inputManager;
-
-    private void Awake()
-    {
-        _inputManager = InputManager.Instance;
-        _inputManager.OnSlide += PlaySlideSound;
-        _inputManager.OnJump += PlayJumpSound;
-        _inputManager.OnMoveLeft += PlayAirSound;
-        _inputManager.OnMoveRight += PlayAirSound;
-    }
-
-    private void PlaySlideSound()
+    public void PlaySlideSound()
     {
         if (!_slideSource.isPlaying)
         {
@@ -28,7 +15,7 @@ public sealed class PlayerSoundManager : MonoBehaviour
         }
     }
 
-    private void PlayAirSound()
+    public void PlayAirSound()
     {
         if (!_airSource.isPlaying)
         {
@@ -36,7 +23,7 @@ public sealed class PlayerSoundManager : MonoBehaviour
         }
     }
 
-    private void PlayJumpSound()
+    public void PlayJumpSound()
     {
         if(!_jumpSource.isPlaying)
         {

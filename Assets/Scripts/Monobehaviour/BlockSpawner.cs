@@ -3,15 +3,15 @@ using UnityEngine.UI;
 
 public sealed class BlockSpawner : MonoBehaviour
 {
-    public Block[] blocks;
-    public float initialSpeed = 10;
-    private float _spawnPos = -124;
+    [SerializeField] private Block[] blocks;
+    [SerializeField] private Button _touchToStartBtn;
+    [SerializeField] private PlayerController _playerController;
+    [SerializeField] private float initialSpeed = 10;
     [SerializeField] private int _easyMediumDistance;
     [SerializeField] private int _mediumDistance;
     [SerializeField] private int _mediumHardDistance;
     [SerializeField] private int _hardDistance;
-    [SerializeField] private Button touchToStartBtn;
-    [SerializeField] private PlayerAnimationManager playerAnimation;
+    private readonly float _spawnPos = -124;
 
     public float CurrentSpeed { get; set; }
     public float SpawnPos { get { return _spawnPos; } }
@@ -25,25 +25,42 @@ public sealed class BlockSpawner : MonoBehaviour
 
     private void Awake()
     {
+        Init();
+    }
+
+    public void Init()
+    {
+        InitInstance();
+        AddTouchButtonListener();
+    }
+
+    private void InitInstance()
+    {
         if (_instance != null && _instance != this)
         {
             Debug.LogError("Not supposed to have more than 1 BlockSpawner on scene");
-            Destroy(this.gameObject);
         }
         else
         {
             _instance = this;
         }
-
-        touchToStartBtn.onClick.AddListener(TouchToStart);
     }
 
-    public void TouchToStart()
+    private void AddTouchButtonListener()
     {
-        CurrentSpeed = initialSpeed; // move the scenary
-        touchToStartBtn.gameObject.SetActive(false); // hide the 'touch to start' screen
-        playerAnimation.StartRunning(); // start player run animation
-        StatsSystem.Instance.StartMeasuringDistance(); // start measuring the distance
+        _touchToStartBtn.onClick.AddListener(OnTouchToStart);
+    }
+
+    private void DisableTouchToStartScreen()
+    {
+        _touchToStartBtn.gameObject.SetActive(false); // hide the 'touch to start' screen
+    }
+
+    public void OnTouchToStart()
+    {
+        CurrentSpeed = initialSpeed; // start moving the scenary
+        _playerController.StartRunning();
+        DisableTouchToStartScreen();
     }
 
     public void StopAllBlocks()

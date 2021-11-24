@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class KillableObstacle : MonoBehaviour, IObstacle
+public sealed class KillableObstacle : MonoBehaviour, IObstacle
 {
-    public int TakeDamage()
-    {
-        return 2;
-    }
+    private readonly int _damage = 2;
 
+    public int GetDamageAmount()
+    {
+        return _damage;
+    }
 }

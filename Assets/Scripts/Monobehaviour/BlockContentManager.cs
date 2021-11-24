@@ -1,24 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public sealed class BlockContentManager : MonoBehaviour
 {
-    [SerializeField] private Transform collectableGroup;
-    private ICollectable[] collectables;
+    [SerializeField] private Transform _collectableGroup;
+    private ICollectable[] _collectables;
 
     private void Awake()
     {
-        collectables = new ICollectable[collectableGroup.childCount];
-        if(collectables.Length > 0 && collectables[0] == null) // Fill the array on the first time executing
+        Init();
+    }
+
+    public void Init()
+    {
+        FillCollectableArray();
+    }
+
+    private void FillCollectableArray()
+    {
+        _collectables = new ICollectable[_collectableGroup.childCount];
+        if (_collectables.Length > 0 && _collectables[0] == null) // Fill the array on the first time executing
         {
-            collectables = collectableGroup.GetComponentsInChildren<ICollectable>();
+            _collectables = _collectableGroup.GetComponentsInChildren<ICollectable>();
         }
     }
 
     private void OnEnable()
     {
-        foreach(ICollectable item in collectables) // enable all collectables items
+        EnableAllCollectables();
+    }
+
+    private void EnableAllCollectables()
+    {
+        foreach (ICollectable item in _collectables)
         {
             item.EnableMe();
         }

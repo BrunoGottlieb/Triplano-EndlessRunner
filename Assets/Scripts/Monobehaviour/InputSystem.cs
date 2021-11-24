@@ -4,10 +4,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [DefaultExecutionOrder(-1)]
-public sealed class InputManager : MonoBehaviour
+public sealed class InputSystem : MonoBehaviour
 {
-    private static InputManager _instance;
-    public static InputManager Instance { get { return _instance; } }
+    public static InputSystem Instance { get { return _instance; } }
 
     public delegate void StartTouch(Vector2 position, float time);
     public event StartTouch OnStartTouch;
@@ -22,13 +21,23 @@ public sealed class InputManager : MonoBehaviour
     public Action OnSlide;
 
     private PlayerControls _playerControls;
+    private static InputSystem _instance;
 
     private void Awake()
     {
+        Init();
+    }
+
+    public void Init()
+    {
+        InitInstance();
+    }
+
+    private void InitInstance()
+    {
         if (_instance != null && _instance != this)
         {
-            Debug.LogError("Not supposed to have more than 1 InputManager on scene");
-            Destroy(this.gameObject);
+            Debug.LogError("Not supposed to have more than 1 InputSystem on scene");
         }
         else
         {
@@ -37,17 +46,33 @@ public sealed class InputManager : MonoBehaviour
         _playerControls = new PlayerControls();
     }
 
+
     private void OnEnable()
+    {
+        EnablePlayerControls();
+    }
+
+    private void EnablePlayerControls()
     {
         _playerControls.Enable();
     }
 
     private void OnDisable()
     {
+        DisablePlayerControls();
+    }
+
+    private void DisablePlayerControls()
+    {
         _playerControls.Disable();
     }
 
     private void Start()
+    {
+        SubscribeOnInputs();
+    }
+
+    public void SubscribeOnInputs()
     {
         _playerControls.Touch.PrimaryContact.started += context => StartTouchPrimary(context);
         _playerControls.Touch.PrimaryContact.canceled += context => EndTouchPrimary(context);

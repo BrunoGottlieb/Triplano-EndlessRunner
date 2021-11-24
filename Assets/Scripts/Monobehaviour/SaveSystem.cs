@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class SaveSystem : MonoBehaviour
+public sealed class SaveSystem : MonoBehaviour
 {
-    public static readonly string SAVE_FOLDER = Application.persistentDataPath + "/Saves/";
+    public static readonly string saveFolder = Application.persistentDataPath + "/Saves/";
 
     public static void Init()
     {
-        if(!Directory.Exists(SAVE_FOLDER))
+        if(!Directory.Exists(saveFolder))
         {
-            Directory.CreateDirectory(SAVE_FOLDER);
+            Directory.CreateDirectory(saveFolder);
         }
     }
 
@@ -32,14 +30,14 @@ public class SaveSystem : MonoBehaviour
 
     private static void Save(string saveString)
     {
-        File.WriteAllText(SAVE_FOLDER + "Save.txt", saveString);
+        File.WriteAllText(saveFolder + "Save.txt", saveString);
     }
 
     private static string Load()
     {
-        if(File.Exists(SAVE_FOLDER + "save.txt"))
+        if(File.Exists(saveFolder + "save.txt"))
         {
-            return File.ReadAllText(SAVE_FOLDER + "save.txt");
+            return File.ReadAllText(saveFolder + "save.txt");
         }
         else
         {

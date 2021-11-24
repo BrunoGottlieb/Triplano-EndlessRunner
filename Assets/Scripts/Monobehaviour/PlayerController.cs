@@ -1,30 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public sealed class PlayerController : MonoBehaviour
 {
+    [SerializeField] private GameObject[] _bodyColliders; // 0 = stand | 1 = jump | 2 = slide
     [SerializeField] private LaneSystem _laneSystem;
+    [SerializeField] private LeadboardScreen _leadboardScreen;
     [SerializeField] private int _laneSpeed = 8;
     [SerializeField] private float _jumpSpeed = 3;
     [SerializeField] private float _jumpHeight = 3;
     [SerializeField] private float _fallSpeed = 0.5f;
-    [SerializeField] private GameObject[] bodyColliders; // 0 = stand | 1 = jump | 2 = slide
 
     private PlayerMovementManager _movementManager;
     private PlayerAnimationManager _animatorManager;
+    private PlayerSoundManager _soundManager;
+
     private enum BodyCollider { Stand, Jump, Slide }
 
     private int _LaneSpeed { get; set; }
     private float _FallSpeed { get; set; }
     private float _JumpHeight { get; set; }
     private float _JumpSpeed { get; set; }
-    public bool CanChangeLane { get; set; }
 
     private void Awake()
     {
+        GetReferences();
+    }
+    private void GetReferences()
+    {
         _movementManager = this.GetComponent<PlayerMovementManager>();
         _animatorManager = this.GetComponent<PlayerAnimationManager>();
+        _soundManager = this.GetComponent<PlayerSoundManager>();
     }
 
     public void Init(int laneSpeed, float fallSpeed, float jumpSpeed, float jumpHeight, LaneSystem laneSystem)
@@ -34,10 +39,16 @@ public sealed class PlayerController : MonoBehaviour
         _fallSpeed = fallSpeed;
         _jumpSpeed = jumpSpeed;
         _jumpHeight = jumpHeight;
-        Start();
+        GetReferences();
+        SetVariableValues();
     }
 
     private void Start()
+    {
+        SetVariableValues();
+    }
+
+    private void SetVariableValues()
     {
         _LaneSpeed = _laneSpeed;
         _FallSpeed = _fallSpeed;
@@ -45,66 +56,136 @@ public sealed class PlayerController : MonoBehaviour
         _JumpHeight = _jumpHeight;
     }
 
-    private void OnEnable()
-    {
-        InputManager.Instance.OnMoveLeft += OnMoveLeft;
-        InputManager.Instance.OnMoveRight += OnMoveRight;
-        InputManager.Instance.OnJump += OnJump;
-        InputManager.Instance.OnSlide += OnSlide;
-    }
-
-    private void OnDisable()
-    {
-        InputManager.Instance.OnMoveLeft -= OnMoveLeft;
-        InputManager.Instance.OnMoveRight -= OnMoveRight;
-        InputManager.Instance.OnJump -= OnJump;
-        InputManager.Instance.OnSlide -= OnSlide;
-    }
-
     private void FixedUpdate()
     {
-        if (!_animatorManager.IsJumping && !_animatorManager.IsSliding && _animatorManager.PlayerCanInteract)
-        { 
-            SetCollider((int)BodyCollider.Stand);
-        }
-        _movementManager.Move(_LaneSpeed, _laneSystem.GetLane());
+        DoMovement();
+    }
+
+    private void DoMovement()
+    {
+        SetStandCollider();
+        _movementManager.Move(_LaneSpeed, _laneSystem.GetCurrentLane());
         _movementManager.Jump(_FallSpeed, _JumpHeight, _JumpSpeed);
-        _movementManager.Slide();
     }
 
-    private void OnMoveLeft() // Called by input action
+    private void SetStandCollider()
     {
-        /// Not necessary
-    }
-
-    private void OnMoveRight() // Called by input action
-    {
-        /// Not necessary
-    }
-
-    private void OnJump() // Called by input action
-    {
-        if(_animatorManager.PlayerCanInteract)
+        if (_animatorManager.IsStanding)
         {
-            SetCollider((int)BodyCollider.Jump);
+            SetCollider(BodyCollider.Stand);
         }
     }
 
-    private void OnSlide() // Called by input action
+    private void SetCollider(BodyCollider collider) // On jump or slide
     {
-        if(_animatorManager.PlayerCanInteract)
-        {
-            SetCollider((int)BodyCollider.Slide);
-        }
-    }
-
-    private void SetCollider(int value)
-    {
-        foreach (GameObject col in bodyColliders)
+        foreach (GameObject col in _bodyColliders)
         {
             col.SetActive(false);
         }
-        bodyColliders[value].SetActive(true);
+        _bodyColliders[(int)collider].SetActive(true);
     }
 
+    private void TakeDamage() // Called when collided with something but not died (life > 0)
+    {
+        _animatorManager.PlayDamageAnimation();
+    }
+
+    private void Die() // Called when collided with something and life is now zero
+    {
+        if(_animatorManager.IsDead) { return; }
+        _animatorManager.PlayDeathAnimation();
+        ShakeCamera();
+        StopTheGame();
+        SetLeadboardScreenOn();
+    }
+
+    private void StopTheGame()
+    {
+        BlockSpawner.Instance.StopAllBlocks();
+        StatsSystem.Instance.StopMeasuringDistance();
+    }
+
+    private void ShakeCamera()
+    {
+        CameraShaker.Instance.Shake(2, 5, 0.2f);
+    }
+
+    private void SetLeadboardScreenOn()
+    {
+        _leadboardScreen.gameObject.SetActive(true);
+    }
+
+    private int CalculateDamage(int damageQtd)
+    {
+        int currentEnergy = StatsSystem.Instance.Energy;
+        return currentEnergy - damageQtd;
+    }
+
+    private void SetDamageOnPlayerStats(int damageValue) // When taking damage
+    {
+        StatsSystem.Instance.ApplyDamage(damageValue);
+    }
+
+    public void StartRunning()
+    {
+        _animatorManager.StartRunning(); // start player run animation
+        StatsSystem.Instance.StartMeasuringDistance(); // start measuring the distance
+    }
+
+    public void MoveLeft() // Called by input action
+    {
+        if (_laneSystem.CanDecreaseLane())
+        {
+            _laneSystem.IncreaseCurrentLane();
+            _soundManager.PlayAirSound();
+        }
+    }
+
+    public void MoveRight() // Called by input action
+    {
+        if (_laneSystem.CanIncreaseLane())
+        {
+            _laneSystem.DecreaseCurrentLane();
+            _soundManager.PlayAirSound();
+        }
+    }
+
+    public void Slide() // Called by input action
+    {
+        if (_animatorManager.PlayerCanInteract)
+        {
+            SetCollider(BodyCollider.Slide);
+            _soundManager.PlaySlideSound();
+            _animatorManager.PlaySlideAnimation();
+        }
+    }
+
+    public void Jump() // Called by input action
+    {
+        if (_animatorManager.PlayerCanInteract)
+        {
+            SetCollider(BodyCollider.Jump);
+            _soundManager.PlayJumpSound();
+            _animatorManager.PlayJumpAnimation();
+        }
+    }
+
+    public void StopJumping()
+    {
+        _animatorManager.SetNotJumping(); // Not jumping anymore
+    }
+
+    public void ReceiveDamage(int damageQtd) // Called by PlayerInteraction when collided with something
+    {
+        int remainingLife = CalculateDamage(damageQtd);
+        if (remainingLife > 0)
+        {
+            TakeDamage();
+        }
+        else
+        {
+            Die();
+        }
+        SetDamageOnPlayerStats(damageQtd);
+    }
 }

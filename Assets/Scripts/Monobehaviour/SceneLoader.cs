@@ -11,6 +11,17 @@ public sealed class SceneLoader : MonoBehaviour
         EnableLoadingScreen();
     }
 
+    private IEnumerator LoadSceneAsync(string sceneName)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+
+        while (!operation.isDone)
+        {
+            float progress = Mathf.Clamp01(operation.progress / 0.9f);
+            yield return null;
+        }
+    }
+
     private void EnableLoadingScreen()
     {
         _loadingScreen.SetActive(false);
@@ -32,16 +43,5 @@ public sealed class SceneLoader : MonoBehaviour
     {
         _loadingScreen.SetActive(true);
         StartCoroutine(LoadSceneAsync(SceneManager.GetSceneAt(sceneIndex).name));
-    }
-
-    private IEnumerator LoadSceneAsync(string sceneName)
-    {
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
-
-        while (!operation.isDone)
-        {
-            float progress = Mathf.Clamp01(operation.progress / 0.9f);
-            yield return null;
-        }
     }
 }

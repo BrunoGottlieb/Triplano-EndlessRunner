@@ -18,17 +18,17 @@ public sealed class StatsSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _distanceText;
 
     [Header("Targets")]
-    [SerializeField] private Transform _goldPos;
-    [SerializeField] private Transform _gemPos;
-    [SerializeField] private Transform _energyPos;
+    [SerializeField] private Transform _goldPosition;
+    [SerializeField] private Transform _gemPosition;
+    [SerializeField] private Transform _energyPosition;
 
     public int Gold { get; private set; }
     public int Gem { get; private set; }
     public int Energy { get; private set; }
     public int Distance { get; private set; }
-    public Vector2 GoldPosition { get { return _goldPos.localPosition; } }
-    public Vector2 GemPosition { get { return _gemPos.localPosition; } }
-    public Vector2 EnergyPosition { get { return _energyPos.localPosition; } }
+    public Vector2 GoldPosition { get { return _goldPosition.localPosition; } }
+    public Vector2 GemPosition { get { return _gemPosition.localPosition; } }
+    public Vector2 EnergyPosition { get { return _energyPosition.localPosition; } }
 
     private void Awake()
     {

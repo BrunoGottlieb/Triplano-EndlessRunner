@@ -1916,9 +1916,9 @@ MonoBehaviour:
   _gemText: {fileID: 1159525862}
   _energyText: {fileID: 1476596120}
   _distanceText: {fileID: 485702196}
-  _goldPos: {fileID: 929486614}
-  _gemPos: {fileID: 1895786582}
-  _energyPos: {fileID: 1387317686}
+  _goldPosition: {fileID: 929486614}
+  _gemPosition: {fileID: 1895786582}
+  _energyPosition: {fileID: 1387317686}
 --- !u!1001 &748040068
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2516,7 +2516,7 @@ GameObject:
   - component: {fileID: 929486616}
   - component: {fileID: 929486615}
   m_Layer: 5
-  m_Name: GoldPos
+  m_Name: GoldPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3342,7 +3342,7 @@ GameObject:
   - component: {fileID: 1387317688}
   - component: {fileID: 1387317687}
   m_Layer: 5
-  m_Name: EnergyPos
+  m_Name: EnergyPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4685,7 +4685,7 @@ GameObject:
   - component: {fileID: 1895786584}
   - component: {fileID: 1895786583}
   m_Layer: 5
-  m_Name: GemPos
+  m_Name: GemPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

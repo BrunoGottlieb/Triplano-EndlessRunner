@@ -12,6 +12,14 @@ public sealed class MenuManager : MonoBehaviour
     [SerializeField] private Button _playButton;
     [SerializeField] private Button _exitButton;
 
+    private void Awake()
+    {
+        if (_sceneLoader == null)
+        {
+            _sceneLoader = FindFirstObjectByType<SceneLoader>(FindObjectsInactive.Include);
+        }
+    }
+
     private void Start()
     {
         Init();
@@ -47,6 +55,12 @@ public sealed class MenuManager : MonoBehaviour
 
     private void LoadGameScene()
     {
+        if (_sceneLoader == null)
+        {
+            Debug.LogError("MenuManager could not find a SceneLoader in this scene.", this);
+            return;
+        }
+
         _sceneLoader.LoadScene("EndlessScene");
     }
 
